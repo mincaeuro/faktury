@@ -19,6 +19,8 @@ class Login(models.Model):
 	adresa_ulica = models.CharField(max_length=200)
 	adresa_mesto = models.CharField(max_length=90)
 	adresa_PSC = models.CharField(max_length=20)
+	def __unicode__(self):
+		return str(self.user)
 	
 
 class Faktura(models.Model):
@@ -31,6 +33,8 @@ class Faktura(models.Model):
 	konstantny_symbol = models.CharField(blank=False, max_length=150)
 	doprava = models.CharField(blank=True, max_length=150)
 	komentar = models.TextField(max_length=3000)
+	def __unicode__(self):
+		return str(self.cislo_faktury)
 	
 	
 class Polozky(models.Model):
@@ -39,7 +43,9 @@ class Polozky(models.Model):
 	nazov = models.CharField(blank=False, max_length=300)
 	mnozstvo = models.CharField(blank=False, max_length=100)
 	cena = models.CharField(blank=False, max_length=100)
-
+	def __unicode__(self):
+		return str(self.nazov)
+		
 class Odberatel(models.Model):
 	id = models.AutoField(primary_key=True)
 	owner = models.ForeignKey(Login, blank=False)
@@ -56,4 +62,6 @@ class Odberatel(models.Model):
 	cislo_uctu = models.CharField(blank=False, max_length=100)
 	email = models.EmailField(blank=False)
 	telefon = models.CharField(max_length=50)
+	def __unicode__(self):
+		return str(self.nazov)
 

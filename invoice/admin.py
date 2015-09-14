@@ -2,28 +2,37 @@ from django.contrib import admin
 
 from .models import *
 
-class ChoiceInline(admin.TabularInline):
+class PolozkyInline(admin.TabularInline):
 	model = Polozky
 	extra = 1
+	
+class OdberatelInline(admin.TabularInline):
+	model = Odberatel
+	extra = 1
+	
+class LoginInline(admin.TabularInline):
+	model = Login
+	extra = 1
+	
+	
 
 class LoginAdm(admin.ModelAdmin):
     fieldsets = [
 		('Udaje uzivatela', {'fields': ['user','nazov', 'meno', 'priezvisko', 'email', 'telefon', 'ico', 'dic', 'platca_DPH']}),
-		('Adresa', {'fields': ['adresa_ulica', 'adresa_mesto', 'adresa_PSC'], 'classes': ['collapse']}),
-		('Bankove spojenie', {'fields': ['banka', 'cislo_uctu'], 'classes': ['collapse']}),
-
+		('Adresa', {'fields': ['adresa_ulica', 'adresa_mesto', 'adresa_PSC']}),
+		('Bankove spojenie', {'fields': ['banka', 'cislo_uctu']}),
 				]
-# !!! this seams to not work :/
+	inlines = [LoginInline]
 
-#class PolozkyAdm(admin.ModelAdmin):
-#	fieldsets = [
-#				 ('Polozky Faktury'), {'fields': ['faktura']}
-#				 ('Zoznam poloziek'), {'fields': ['nazov', 'mnozstvo', 'cena']}
-#				
-#				]
-#	inlines = [ChoiceInline]
-
+class PolozkyAdm(admin.ModelAdmin):
+	fieldsets = [
+				 ('Cislo Faktury', {'fields': ['cislo_faktury']}),
+				 ('Udaje', {'fields': ['datum_vystavenia', 'datum_splatnosti', 'datum_dodania', 'konstantny_symbol', 'doprava', 'komentar']}),
+				]
+	inlines = [PolozkyInline]
+	
+	
 admin.site.register(Login, LoginAdm)
-admin.site.register(Faktura)
-admin.site.register(Polozky)#, PolozkyAdm)
+admin.site.register(Faktura, PolozkyAdm)
+admin.site.register(Polozky)
 admin.site.register(Odberatel)
