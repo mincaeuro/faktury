@@ -7,17 +7,16 @@ class PolozkyInline(admin.TabularInline):
 	extra = 1
 	
 class OdberatelInline(admin.TabularInline):
-	model = Odberatel
-	extra = 1
+	model = Faktura
 	
 class LoginInline(admin.TabularInline):
-	model = Login
-	extra = 1
+	model = Faktura
+	extra = 0
 	
 	
 
 class LoginAdm(admin.ModelAdmin):
-    fieldsets = [
+	fieldsets = [
 		('Udaje uzivatela', {'fields': ['user','nazov', 'meno', 'priezvisko', 'email', 'telefon', 'ico', 'dic', 'platca_DPH']}),
 		('Adresa', {'fields': ['adresa_ulica', 'adresa_mesto', 'adresa_PSC']}),
 		('Bankove spojenie', {'fields': ['banka', 'cislo_uctu']}),
@@ -30,9 +29,16 @@ class PolozkyAdm(admin.ModelAdmin):
 				 ('Udaje', {'fields': ['datum_vystavenia', 'datum_splatnosti', 'datum_dodania', 'konstantny_symbol', 'doprava', 'komentar']}),
 				]
 	inlines = [PolozkyInline]
-	
+
+class OdberatelAdm(admin.ModelAdmin):
+	fieldsets = [
+		('Udaje odberatela', {'fields': ['nazov', 'meno', 'priezvisko', 'email', 'telefon', 'ico', 'dic', 'icdph']}),
+		('Adresa', {'fields': ['adresa_ulica', 'adresa_mesto', 'adresa_psc']}),
+		('Bankove spojenie', {'fields': ['banka', 'cislo_uctu']}),
+				]
+	#inlines = [OdberatelInline]
 	
 admin.site.register(Login, LoginAdm)
 admin.site.register(Faktura, PolozkyAdm)
 admin.site.register(Polozky)
-admin.site.register(Odberatel)
+admin.site.register(Odberatel, OdberatelAdm)
