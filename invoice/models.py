@@ -7,6 +7,13 @@ class Login(models.Model):
 	id = models.AutoField(primary_key=True, blank=False)
 	user = models.CharField(blank=False, unique=True, max_length=50)
 	email = models.EmailField(blank=False)
+	password = models.CharField(blank=False, max_length=150)
+	def __unicode__(self):
+		return str(self.user)
+
+class Odosielatel(models.Model):
+	id = models.AutoField(primary_key=True, blank=False)
+	creator = models.ForeignKey(Login, blank=False)
 	nazov = models.CharField(blank=False, max_length=200)
 	meno = models.CharField(blank=False, max_length=50)
 	priezvisko = models.CharField(blank=False, max_length=50)
@@ -20,7 +27,7 @@ class Login(models.Model):
 	adresa_mesto = models.CharField(max_length=90)
 	adresa_PSC = models.CharField(max_length=20)
 	def __unicode__(self):
-		return str(self.user)
+		return str(self.nazov)
 	
 class Odberatel(models.Model):
 	id = models.AutoField(primary_key=True)
@@ -43,8 +50,8 @@ class Odberatel(models.Model):
 	
 class Faktura(models.Model):
 	id = models.AutoField(primary_key=True)
-	creator = models.ForeignKey(Login, blank=False)
-	owner = models.ForeignKey(Odberatel, blank=False)
+	owner = models.ForeignKey(Login, blank=False)
+	creator = models.ForeignKey(Odosielatel, blank=False)
 	cislo_faktury = models.CharField(blank=False, max_length=150)
 	datum_vystavenia = models.DateField(blank=False)
 	datum_splatnosti = models.DateField(blank=False)
@@ -58,12 +65,12 @@ class Faktura(models.Model):
 	
 class Polozky(models.Model):
 	id = models.AutoField(primary_key=True)
+	owner = models.ForeignKey(Login, blank=False)
 	faktura = models.ForeignKey(Faktura, blank=False)
 	nazov = models.CharField(blank=False, max_length=300)
 	mnozstvo = models.CharField(blank=False, max_length=100)
 	cena = models.CharField(blank=False, max_length=100)
 	def __unicode__(self):
 		return str(self.nazov)
-		
 
 
