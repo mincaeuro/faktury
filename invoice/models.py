@@ -22,10 +22,29 @@ class Login(models.Model):
 	def __unicode__(self):
 		return str(self.user)
 	
-
-class Faktura(models.Model):
+class Odberatel(models.Model):
 	id = models.AutoField(primary_key=True)
 	owner = models.ForeignKey(Login, blank=False)
+	nazov = models.CharField(blank=True, max_length=200)
+	meno = models.CharField(blank=True, max_length=50)
+	priezvisko = models.CharField(blank=True, max_length=50)
+	adresa_ulica = models.CharField(max_length=200)
+	adresa_mesto = models.CharField(max_length=90)
+	adresa_psc = models.CharField(max_length=20)
+	ico = models.CharField(blank=False, max_length=50)
+	dic = models.CharField(blank=False, max_length=50)
+	icdph = models.CharField(blank=False, max_length=50)
+	banka = models.CharField(blank=False, max_length=100)
+	cislo_uctu = models.CharField(blank=False, max_length=100)
+	email = models.EmailField(blank=False)
+	telefon = models.CharField(max_length=50)
+	def __unicode__(self):
+		return str(self.nazov)
+	
+class Faktura(models.Model):
+	id = models.AutoField(primary_key=True)
+	creator = models.ForeignKey(Login, blank=False)
+	owner = models.ForeignKey(Odberatel, blank=False)
 	cislo_faktury = models.CharField(blank=False, max_length=150)
 	datum_vystavenia = models.DateField(blank=False)
 	datum_splatnosti = models.DateField(blank=False)
@@ -46,22 +65,5 @@ class Polozky(models.Model):
 	def __unicode__(self):
 		return str(self.nazov)
 		
-class Odberatel(models.Model):
-	id = models.AutoField(primary_key=True)
-	owner = models.ForeignKey(Login, blank=False)
-	nazov = models.CharField(blank=True, max_length=200)
-	meno = models.CharField(blank=True, max_length=50)
-	priezvisko = models.CharField(blank=True, max_length=50)
-	adresa_ulica = models.CharField(max_length=200)
-	adresa_mesto = models.CharField(max_length=90)
-	adresa_psc = models.CharField(max_length=20)
-	ico = models.CharField(blank=False, max_length=50)
-	dic = models.CharField(blank=False, max_length=50)
-	icdph = models.CharField(blank=False, max_length=50)
-	banka = models.CharField(blank=False, max_length=100)
-	cislo_uctu = models.CharField(blank=False, max_length=100)
-	email = models.EmailField(blank=False)
-	telefon = models.CharField(max_length=50)
-	def __unicode__(self):
-		return str(self.nazov)
+
 

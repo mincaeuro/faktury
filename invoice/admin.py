@@ -8,8 +8,13 @@ class PolozkyInline(admin.TabularInline):
 	
 class OdberatelInline(admin.TabularInline):
 	model = Faktura
+	extra = 0
 	
 class LoginInline(admin.TabularInline):
+	model = Odberatel
+	extra = 0
+	
+class FakturaInline(admin.TabularInline):
 	model = Faktura
 	extra = 0
 	
@@ -22,6 +27,7 @@ class LoginAdm(admin.ModelAdmin):
 		('Bankove spojenie', {'fields': ['banka', 'cislo_uctu']}),
 				]
 	inlines = [LoginInline]
+	inlines = [FakturaInline]
 
 class PolozkyAdm(admin.ModelAdmin):
 	fieldsets = [
@@ -36,7 +42,7 @@ class OdberatelAdm(admin.ModelAdmin):
 		('Adresa', {'fields': ['adresa_ulica', 'adresa_mesto', 'adresa_psc']}),
 		('Bankove spojenie', {'fields': ['banka', 'cislo_uctu']}),
 				]
-	#inlines = [OdberatelInline]
+	inlines = [OdberatelInline]
 	
 admin.site.register(Login, LoginAdm)
 admin.site.register(Faktura, PolozkyAdm)
