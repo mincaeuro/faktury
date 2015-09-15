@@ -3,19 +3,19 @@ from django.contrib import admin
 from .models import *
 
 class PolozkyInline(admin.TabularInline):
-	model = Faktura
+	model = Polozky
 	extra = 1
 	
-class OdberatelInline(admin.TabularInline):
-	model = Login
+class ZakaznikInline(admin.TabularInline):
+	model = Faktura
 	extra = 0
 
-class OdosielatelInline(admin.TabularInline):
-	model = Faktura
+class FirmaInline(admin.TabularInline):
+	model = Zakaznik
 	extra = 0
 	
 class LoginInline(admin.StackedInline):
-	model = Odberatel
+	model = Firma
 	extra = 0
 	
 class FakturaInline(admin.TabularInline):
@@ -29,32 +29,39 @@ class LoginAdm(admin.ModelAdmin):
 				]
 	inlines = [LoginInline]
 
-class OdosielatelAdm(admin.ModelAdmin):
+class FirmaAdm(admin.ModelAdmin):
 	fieldsets = [
-		('Osobne Udaje', {'fields': ['nazov', 'meno', 'priezvisko', 'telefon', 'ico', 'dic', 'platca_DPH']}),
+		(None, {'fields': ['creator']}),
+		('Udaje Firmy', {'fields': ['nazov', 'meno', 'priezvisko', 'telefon', 'ico', 'dic', 'platca_DPH']}),
 		('Adresa', {'fields': ['adresa_ulica', 'adresa_mesto', 'adresa_PSC']}),
 		('Bankove spojenie', {'fields': ['banka', 'cislo_uctu']}),
 				]
-	#inlines = [OdberatelInline]
+	inlines = [FirmaInline]
 
-class PolozkyAdm(admin.ModelAdmin):
+class FakturaAdm(admin.ModelAdmin):
 	fieldsets = [
-				 ('Cislo Faktury', {'fields': ['cislo_faktury']}),
-				 ('Udaje', {'fields': ['datum_vystavenia', 'datum_splatnosti', 'datum_dodania', 'konstantny_symbol', 'doprava', 'komentar']}),
+		(None, {'fields': ['owner']}),
+		('Firma', {'fields': ['creator']}), 
+		('Zakaznik', {'fields': ['created_for']}), 
+		('Cislo Faktury', {'fields': ['cislo_faktury']}),
+		('Udaje', {'fields': ['datum_vystavenia', 'datum_splatnosti', 'datum_dodania', 'konstantny_symbol', 'doprava', 'komentar']}),
 				]
-	#inlines = [FakturaInline]
+	inlines = [FakturaInline]
 
-class OdberatelAdm(admin.ModelAdmin):
+
+class ZakaznikAdm(admin.ModelAdmin):
 	fieldsets = [
-		('Udaje odberatela', {'fields': ['nazov', 'meno', 'priezvisko', 'email', 'telefon', 'ico', 'dic', 'icdph']}),
+		(None, {'fields': ['owner']}),
+		('Firma', {'fields': ['creator']}),
+		('Udaje Zakaznika', {'fields': ['nazov', 'meno', 'priezvisko', 'email', 'telefon', 'ico', 'dic', 'icdph']}),
 		('Adresa', {'fields': ['adresa_ulica', 'adresa_mesto', 'adresa_psc']}),
 		('Bankove spojenie', {'fields': ['banka', 'cislo_uctu']}),
 				]
-	#inlines = [OdberatelInline]
+	inlines = [ZakaznikInline]
 	
 admin.site.register(Login, LoginAdm)
-admin.site.register(Odberatel, OdberatelAdm)
-admin.site.register(Odosielatel)
-admin.site.register(Faktura, PolozkyAdm)
+admin.site.register(Zakaznik, ZakaznikAdm)
+admin.site.register(Firma, FirmaAdm)
+admin.site.register(Faktura, FakturaAdm)
 admin.site.register(Polozky)
 

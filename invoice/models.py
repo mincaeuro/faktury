@@ -11,7 +11,7 @@ class Login(models.Model):
 	def __unicode__(self):
 		return str(self.user)
 
-class Odosielatel(models.Model):
+class Firma(models.Model):
 	id = models.AutoField(primary_key=True, blank=False)
 	creator = models.ForeignKey(Login, blank=False)
 	nazov = models.CharField(blank=False, max_length=200)
@@ -29,9 +29,10 @@ class Odosielatel(models.Model):
 	def __unicode__(self):
 		return str(self.nazov)
 	
-class Odberatel(models.Model):
+class Zakaznik(models.Model):
 	id = models.AutoField(primary_key=True)
 	owner = models.ForeignKey(Login, blank=False)
+	creator = models.ForeignKey(Firma, blank=False)
 	nazov = models.CharField(blank=True, max_length=200)
 	meno = models.CharField(blank=True, max_length=50)
 	priezvisko = models.CharField(blank=True, max_length=50)
@@ -51,7 +52,8 @@ class Odberatel(models.Model):
 class Faktura(models.Model):
 	id = models.AutoField(primary_key=True)
 	owner = models.ForeignKey(Login, blank=False)
-	creator = models.ForeignKey(Odosielatel, blank=False)
+	creator = models.ForeignKey(Firma, blank=False)
+	created_for = models.ForeignKey(Zakaznik, blank=False)
 	cislo_faktury = models.CharField(blank=False, max_length=150)
 	datum_vystavenia = models.DateField(blank=False)
 	datum_splatnosti = models.DateField(blank=False)
