@@ -12,7 +12,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-<title>Faktura {{ }}</title>
+<title>Faktura {{creator}}</title>
 
 </head>
 
@@ -21,14 +21,18 @@
 
 
 
-{% if latest_question_list %}
+{% if Fakturas_list %}
     <ul>
-    {% for question in latest_question_list %}
-        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% for b in Fakturas_list %}
+        <li><a href="/faktury/{{b.creator.id}}/{{b.created_for.id}}/{{ b.id }}/">{{ b.cislo_faktury }}</a> - {{ b.owner }} <br />
+        Datum: {{b.datum_vystavenia}}<br />
+        Datum splatnosti: {{b.datum_splatnosti}}
+        </li>
+        <hr />
     {% endfor %}
     </ul>
 {% else %}
-    <p>No polls are available.</p>
+    <p>Ziadne vysledky.</p>
 {% endif %}
 
 </body>

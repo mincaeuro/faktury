@@ -4,17 +4,17 @@ from django.http import HttpResponse
 # Create your views here.
 from .models import *
 
+from django.template import Context, loader
+
+
 def index(request):
-	return HttpResponse("Hello, world. You're at the polls index.")
+	Fakturas_list = Faktura.objects.all()
+	t = loader.get_template('invoice/index.html')
+	c = Context({'Fakturas_list': Fakturas_list,})
+	return HttpResponse(t.render(c))
 
 def detail(request, faktura_id):
-	return HttpResponse("You're looking at Faktura: %s." % faktura_id)
-
-def firma(request, firma_id):
-	return HttpResponse("You're looking at Firma: %s." % firma_id)
-
-def zakaznik(request, zakaznik_id):
-	return HttpResponse("You're looking at Zakaznik: %s." % zakaznik_id)
-
-def produkt(request, produkt_id):
-	return HttpResponse("You're looking at Produkt: %s." % produkt_id)
+	Fakturas_list = Faktura.objects.all()
+	t = loader.get_template('invoice/index.html')
+	c = Context({'Fakturas_list': Fakturas_list,})
+	return HttpResponse(t.render(c))
