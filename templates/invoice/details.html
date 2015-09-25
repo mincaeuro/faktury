@@ -17,8 +17,22 @@
 </head>
 
 <body>
-<h1>Vitajte</h1>
 
+{% if faktura_id %}
+<h1>Detail Faktury cislo {{b.cislo_faktury}}</h1>
+
+    {% for b in faktura_id %}
+        <p>{{ b.cislo_faktury }}<br />
+        Dodavatel: {{ b.owner }} <br />
+        Datum: {{b.datum_vystavenia}}<br />
+        Datum splatnosti: {{b.datum_splatnosti}}
+        </p>
+        <hr />
+    {% endfor %}
+
+{% else %}
+    <p>Ziadne vysledky.</p>
+{% endif %}
 
 
 </body>
