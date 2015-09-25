@@ -21,20 +21,6 @@
 
 
 
-{% if Fakturas_list %}
-    <ul>
-    {% for b in Fakturas_list %}
-        <li><a href="/detail/{{ b.id }}">{{ b.cislo_faktury }}</a> - {{ b.owner }} <br />
-        Datum: {{b.datum_vystavenia}}<br />
-        Datum splatnosti: {{b.datum_splatnosti}}
-        </li>
-        <hr />
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Ziadne vysledky.</p>
-{% endif %}
-
 </body>
 
 </html>

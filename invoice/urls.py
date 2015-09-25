@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
-	#url(r'^$', views.users, name='users'),
+	url(r'^/detail/(?P<faktura_id>[0-9]+)', views.detail, name='detail')
 ]
