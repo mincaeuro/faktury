@@ -12,27 +12,25 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-<title>Faktura {{creator}}</title>
+<title>Faktura {{faktura}}</title>
 
 </head>
 
 <body>
 
-{% if faktura_id %}
-<h1>Detail Faktury cislo {{b.cislo_faktury}}</h1>
-
-    {% for b in faktura_id %}
-        <p>{{ b.cislo_faktury }}<br />
-        Dodavatel: {{ b.owner }} <br />
-        Datum: {{b.datum_vystavenia}}<br />
-        Datum splatnosti: {{b.datum_splatnosti}}
+<h1>Detail Faktury cislo: {{faktura}}</h1>
+        <p>
+        Dodavatel: {{ faktura.owner }} <br />
+        Datum: {{faktura.datum_vystavenia}}<br />
+        Datum splatnosti: {{faktura.datum_splatnosti}}<br />
+        Komentar: {{faktura.komentar}}
         </p>
-        <hr />
-    {% endfor %}
-
-{% else %}
-    <p>Ziadne vysledky.</p>
-{% endif %}
+        <p><b>Polozky</b></p><ul>:
+        {% for polozky in faktura.polozky.all %}
+   		 <li>{{ polozky.nazov }}</li>
+{% endfor %}
+        </ul>
+       
 
 
 </body>

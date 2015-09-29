@@ -1,10 +1,10 @@
-#from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse
+from django.template import Context, loader
 
 # Create your views here.
 from .models import *
 
-from django.template import Context, loader
 
 
 def index(request):
@@ -14,7 +14,5 @@ def index(request):
 	return HttpResponse(t.render(c))
 
 def detail(request, faktura_id):
-	faktura_ = Faktura.objects.all()
-	t = loader.get_template('invoice/details.html')
-	c = Context({'faktura_id': faktura_id,})
-	return HttpResponse(t.render(c))
+	faktura = get_object_or_404(Faktura, pk=faktura_id)
+	return render(request, 'invoice/details.html', {'faktura': faktura})
