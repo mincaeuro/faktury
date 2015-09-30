@@ -16,3 +16,13 @@ def index(request):
 def detail(request, faktura_id):
 	faktura = get_object_or_404(Faktura, pk=faktura_id)
 	return render(request, 'invoice/details.html', {'faktura': faktura})
+
+def firmas_all(request):
+	Firmas_list = Firma.objects.all()
+	t = loader.get_template('invoice/firmas.html')
+	c = Context({'Firmas_list': Firmas_list,})
+	return HttpResponse(t.render(c))
+
+def firma(request, firma_id):
+	firma = get_object_or_404(Firma, pk=firma_id)
+	return render(request, 'invoice/firma.html', {'firma': firma})

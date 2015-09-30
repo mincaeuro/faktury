@@ -14,7 +14,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-<title>Faktura {{faktura}}</title>
+<title>Faktura {{firma}}</title>
 
 </head>
 
@@ -24,9 +24,8 @@
   <div class="navbar-header">
 <ul class="nav navbar-nav">
 <li><a href="/">Domov</a></li>
-<li><a href="#">Moje Firmy</a></li>
+<li><a href="/firma" class="active">Moje Firmy</a></li>
 <li><a href="#">Moji zakaznici</a></li>
-<li class="active"><a href="#">Faktury</a></li>
 <li><a href="#">Nastavenia uctu</a></li>
 <li><a href="/admin">Admin</a></li>
 </ul>
@@ -34,11 +33,12 @@
  </nav>
 <ol class="breadcrumb">
   <li><a href="/">Domov</a></li>
-  <li class="active">Detail</li>
+  <li><a href="/firma/">Firmy</a></li>
+  <li class="active">Firma</li>
 
 </ol>
 <!--<button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
-<h1>Detail Faktury cislo: {{faktura}}</h1>
+<h1>Detail Firmy: {{firma}}</h1>
         <p>
         Dodavatel: {{ faktura.owner }} <br />
         Datum: {{faktura.datum_vystavenia}}<br />

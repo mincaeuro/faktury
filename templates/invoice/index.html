@@ -3,6 +3,8 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
@@ -17,27 +19,44 @@
 </head>
 
 <body>
-<ol class="breadcrumb">
-  <li><a href="/">Domov</a></li>
-</ol>
+<div class="container-fluid">
+<nav class="navbar navbar-default navbar-tall navbar-full" role="navigation">
+  <div class="navbar-header">
+<ul class="nav navbar-nav">
+<li class="active"><a href="/">Domov</a></li>
+<li><a href="/firma">Moje Firmy</a></li>
+<li><a href="#">Moji zakaznici</a></li>
+<li><a href="#">Nastavenia uctu</a></li>
+<li><a href="/admin">Admin</a></li>
+</ul>
+  </div>
+ </nav>
+<!-- <button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
 <h1>Vitajte</h1>
 
 
+<p> Jednoducha online faktracia</p>
 
+<h3>Zoznam vystavenych faktur:</h3>
 {% if Fakturas_list %}
-    <ul>
+    <table class="table table-striped table-hover">
+    <thead>
+    <tr><th>Cislo</th><th>Datum vystavenia</th><th>Datum splatnosti</th><th>Vytvoril</th></tr>
+    </thead>
+    <tbody>
     {% for b in Fakturas_list %}
-        <li><a href="/detail/{{ b.id }}">{{ b.cislo_faktury }}</a> - {{ b.owner }} <br />
-        Datum: {{b.datum_vystavenia}}<br />
-        Datum splatnosti: {{b.datum_splatnosti}}
-        </li>
-        <hr />
+        <tr><td><a href="/detail/{{ b.id }}">{{ b.cislo_faktury }}</a></td>
+        <td>{{b.datum_vystavenia}}</td>
+        <td>{{b.datum_splatnosti}}</td>
+        <td>{{ b.owner }}</td>
+        </tr>
     {% endfor %}
-    </ul>
+    </tbody>
+</table>
 {% else %}
     <p>Ziadne vysledky.</p>
 {% endif %}
-
+</div>
 </body>
 
 </html>
