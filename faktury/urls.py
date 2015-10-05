@@ -19,6 +19,7 @@ from django.contrib import admin
 urlpatterns = [
 	url(r'^', include('invoice.urls')),
 	url(r'^firma/', include('invoice.urls')),
+	url(r'^zakaznici/', include('invoice.urls')),
 	url(r'^detail/(?P<faktura_id>\d+)/$', include('invoice.urls')),
 	url(r'^firma/(?P<firma_id>\d+)/$', include('invoice.urls')),
 	url(r'^faktury/', include('invoice.urls')),

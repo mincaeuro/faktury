@@ -23,6 +23,12 @@ def firmas_all(request):
 	c = Context({'Firmas_list': Firmas_list,})
 	return HttpResponse(t.render(c))
 
+def zakaznik_all(request):
+	zakaznik_list = Zakaznik.objects.all()
+	t = loader.get_template('invoice/zakaznici.html')
+	c = Context({'zakaznik_list': zakaznik_list,})
+	return HttpResponse(t.render(c))
+
 def firma(request, firma_id):
 	firma = get_object_or_404(Firma, pk=firma_id)
 	return render(request, 'invoice/firma.html', {'firma': firma})
