@@ -41,7 +41,7 @@
     </thead>
     <tbody>
     {% for b in Fakturas_list %}
-        <tr><td><a href="/detail/{{ b.id }}">{{ b.cislo_faktury }}</a></td>
+        <tr><td><a href="{% url 'detail' b.id %}">{{ b.cislo_faktury }}</a></td>
         <td>{{b.datum_vystavenia}}</td>
         <td>{{b.datum_splatnosti}}</td>
         <td>{{ b.owner }}</td>
