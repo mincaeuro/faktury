@@ -32,3 +32,18 @@ def zakaznik_all(request):
 def firma(request, firma_id):
 	firma = get_object_or_404(Firma, pk=firma_id)
 	return render(request, 'invoice/firma.html', {'firma': firma})
+
+def edit_detail(request, faktura_id):
+	faktura = get_object_or_404(Faktura, pk=faktura_id)
+	try:
+		zmeny = faktura.cislo_faktury.get(pk=request.POST['komentar'])
+    	except (KeyError, Faktura.DoesNotExist):
+    	# Redisplay the question voting form.
+			return render(request, 'invoice/details.html#letsedit', {
+            'faktura': faktura,
+						'error_message': "Chyba, ne-existujuci/neaktualny zaznam",
+        })
+	else:
+				zmeny.edit_details += 1
+				zmeny.save()
+	return HttpResponseRedirect(reverse('faktura:faktura', args=(faktura.id,)))

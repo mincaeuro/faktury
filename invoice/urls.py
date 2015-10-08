@@ -7,5 +7,6 @@ urlpatterns = [
 	url(r'^firma/$', views.firmas_all, name='firmas_all'),
 	url(r'^zakaznici/$', views.zakaznik_all, name='zakaznik_all'),
 	url(r'^detail/(?P<faktura_id>\d+)/$', views.detail, name='detail'),
+	url(r'^detail/(?P<faktura_id>\d+)/edit/$', views.edit_detail, name='edit_detail'),
 	url(r'^firma/(?P<firma_id>\d+)/$', views.firma, name='firma'),
 ]

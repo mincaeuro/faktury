@@ -2,17 +2,7 @@
 <html>
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+{% include "invoice/head.html" %}
 
 <title>Faktura {{faktura}}</title>
 
@@ -34,20 +24,72 @@
 </ol>
 <!--<button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
 <h1>Detail Faktury cislo: {{faktura}}</h1>
+<div id="details">
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
         <p>
         Dodavatel: {{ faktura.owner }} <br />
         Datum: {{faktura.datum_vystavenia}}<br />
         Datum splatnosti: {{faktura.datum_splatnosti}}<br />
         Komentar: {{faktura.komentar}}
         </p>
+         <form action="#" id="letsedit">
+        <button id="editMe">Upravit udaje</button>
+        </form>
         <p><b>Polozky</b></p><ul>:
         {% for polozky in faktura.polozky.all %}
    		 <li>{{ polozky.nazov }}</li>
 {% endfor %}
         </ul>
        
+</div>
+
+
+
+
+
+<div id="detailsform">
+<form action="{% url 'invoice:edit_detail' faktura.id %}" method="post" class="form-horizonta">
+<div class="form-group">
+{% csrf_token %}
+<label class="control-label col-sm-2" for="{{faktura}}">cislo</label><input type="text" id="{{faktura}}" value="{{faktura}}"/>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-2" for="{{faktura.datum_vystavenia}}">Datum vystavenie</label><input type="text" id="{{faktura.datum_vystavenia}}" value="{{faktura.datum_vystavenia}}"/>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-2" for="{{faktura.datum_splatnosti}}">Datum splatnosti</label><input type="text" id="{{faktura.datum_splatnosti}}" value="{{faktura.datum_splatnosti}}"/>
+</div>
+<div class="form-group">
+<label class="control-label col-sm-2" for="kom">sprievodny text</label>
+<textarea id="kom">
+{{faktura.komentar}}
+</textarea>
+</div>
+
+
+<input type="submit" value="Submit" />
+
+</form>
+</div>
+    
 
 </div>
+<script>
+
+$( document ).ready(function() {
+  $('#detailsform').hide();
+});
+
+$('#letsedit').submit(function( event ) {
+    $('#details').hide();
+   $('#detailsform').show();
+
+});
+
+</script>
+
+
 </body>
 
 </html>
