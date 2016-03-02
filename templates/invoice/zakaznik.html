@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% include "invoice/head.html" %}
+<title>Detail zakaznika: {{ zakaznik.nazov }}</title>
+
+</head>
+
+<body>
+<div class="container-fluid	">
+<nav class="navbar navbar-default navbar-tall navbar-full" role="navigation">
+  <div class="navbar-header">
+<ul class="nav navbar-nav">
+{% include "invoice/nav.html" %}
+</ul>
+  </div>
+ </nav>
+<ol class="breadcrumb">
+  <li><a href="/">Domov</a></li>
+  <li><a href="/users/zakaznici/">Zakaznici</a></li>
+  <li class="active">Zakaznik</li>
+
+</ol>
+<!--<button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
+<h1>Detail: {{zakaznik.nazov}}</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <p>
+        Nazov: {{ zakaznik.meno }}, {{ zakaznik.priezvisko }}<br />
+        Adresa: {{zakaznik.adresa_ulica}}, {{ zakaznik.adresa_mesto }}, {{ zakaznik.adresa_psc }}<br />
+        c. uctu: {{zakaznik.cislo_uctu}}<br />
+        email: {{zakaznik.email}}
+        </p>
+       
+
+</div>
+</body>
+
+</html>
