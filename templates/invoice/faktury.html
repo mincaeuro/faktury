@@ -3,8 +3,7 @@
 <head>
 
 {% include "invoice/head.html" %}
-
-<title>Faktury zakaznika</title>
+<title>Faktury vseobecne</title>
 
 </head>
 
@@ -17,13 +16,17 @@
 </ul>
   </div>
  </nav>
+
+ <ol class="breadcrumb">
+  <li><a href="/">Domov</a></li>
+  <li class="active">Faktury</li>
+
+</ol>
 <!-- <button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
-<h1>Vitajte</h1>
+<h1>Zoznam mojich faktur</h1>
 
 
-<p> Jednoducha online faktracia</p>
 
-<h3>Zoznam vystavenych faktur:</h3>
 {% if Fakturas_list %}
     <table class="table table-striped table-hover">
     <thead>
@@ -40,7 +43,7 @@
     </tbody>
 </table>
 {% else %}
-    <p>Ziadne vysledky.</p>
+    <p>Ziadne zaznamy.</p>
 {% endif %}
 </div>
 </body>
