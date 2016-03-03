@@ -33,7 +33,6 @@ def firma(request, firma_id):
 	firma = get_object_or_404(Firma, pk=firma_id)
 	return render(request, 'invoice/firma.html', {'firma': firma})
 
-
 def zakaznik(request, zakaznik_id):
 	firma = get_object_or_404(Zakaznik, pk=zakaznik_id)
 	return render(request, 'invoice/zakaznik.html', {'zakaznik': zakaznik})

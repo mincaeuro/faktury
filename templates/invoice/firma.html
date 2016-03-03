@@ -24,16 +24,13 @@
 <!--<button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
 <h1>Detail Firmy: {{firma}}</h1>
         <p>
-        Dodavatel: {{ faktura.owner }} <br />
-        Datum: {{faktura.datum_vystavenia}}<br />
-        Datum splatnosti: {{faktura.datum_splatnosti}}<br />
-        Komentar: {{faktura.komentar}}
+        Nazov: {{firma.nazov}} <br />
+        Meno: {{firma.meno}}, {{firma.priezvisko}}<br />
+        ico: {{firma.ico}}<br />
+        dic: {{firma.dic}}<br />
+        bankove udaje: {{firma.cislo_uctu}}, {{firma.banka}}
         </p>
-        <p><b>Polozky</b></p><ul>:
-        {% for polozky in faktura.polozky.all %}
-   		 <li>{{ polozky.nazov }}</li>
-{% endfor %}
-        </ul>
+ 
        
 
 </div>
