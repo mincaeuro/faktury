@@ -1,7 +1,7 @@
 <!-- top nav -->
 <li><a href="/">Domov</a></li>
-<li><a href="{% url 'invoice:firmas_all' %}">Moje Firmy</a></li>
-<li><a href="{% url 'invoice:zakaznik_all' %}">Moji zakaznici</a></li>
-<li><a href="{% url 'invoice:faktury_all' %}">Faktury</a></li>
-<li><a href="/#">Nastavenia uctu</a></li>
+<li{% if request.get_full_path == 'invoice:firmas_all' %} class="active" {% endif %}><a href="{% url 'invoice:firmas_all' %}">Moje Firmy</a></li>
+<li{% if request.get_full_path == 'invoice:zakaznik_all' %} class="active" {% endif %}><a href="{% url 'invoice:zakaznik_all' %}">Moji zakaznici</a></li>
+<li{% if request.get_full_path == 'invoice:faktury_all' %} class="active" {% endif %}><a href="{% url 'invoice:faktury_all' %}">Faktury</a></li>
+<li{% if request.get_full_path == 'invoice:firmas_all' %} class="active" {% endif %}><a href="/#">Nastavenia uctu</a></li>
 <li><a href="/admin">Admin</a></li>
