@@ -32,10 +32,16 @@ def login_user(request):
                 return HttpResponseRedirect('/')
     return render_to_response('index.html', context_instance=RequestContext(request))
 
-@login_required(login_url='/login/')
+##@login_required(login_url='/login/')
+
 def detail(request, faktura_id):
 	faktura = get_object_or_404(Faktura, pk=faktura_id)
-	return render(request, 'invoice/details.html', {'faktura': faktura})
+	polozky = Polozky.objects.filter(faktura=faktura_id)
+	#zakaznik = Zakaznik.objects.filter(faktura=faktura.db_uuid)
+	zakaznik = Zakaznik.objects.get(nazov=faktura.created_for)
+	t = loader.get_template('invoice/details.html')
+	c = Context({'faktura': faktura, 'polozky': polozky, 'zakaznik': zakaznik})
+	return HttpResponse(t.render(c))
 
 def firmas_all(request):
 	Firmas_list = Firma.objects.all()
@@ -57,11 +63,17 @@ def faktury_all(request):
 
 def firma(request, firma_id):
 	firma = get_object_or_404(Firma, pk=firma_id)
-	return render(request, 'invoice/firma.html', {'firma': firma})
+	zoznam = Faktura.objects.filter(creator=firma.id)
+	t = loader.get_template('invoice/firma.html')
+	c = Context({'firma': firma, 'zoznam': zoznam})
+	return HttpResponse(t.render(c))
 
 def zakaznik(request, zakaznik_id):
 	zakaznik = get_object_or_404(Zakaznik, pk=zakaznik_id)
-	return render(request, 'invoice/zakaznik.html', {'zakaznik': zakaznik})
+	zoznam = Faktura.objects.filter(created_for=zakaznik.id)
+	t = loader.get_template('invoice/zakaznik.html')
+	c = Context({'zakaznik': zakaznik, 'zoznam': zoznam})
+	return HttpResponse(t.render(c))
 
 def edit_detail(request, faktura_id):
 	faktura = get_object_or_404(Faktura, pk=faktura_id)

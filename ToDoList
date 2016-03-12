@@ -1,0 +1,10 @@
+python manage.py migrate
+python manage.py migrate --fake invoice
+python manage.py createsuperuser
+python manage.py runserver
+python manage.py migrate --fake invoice
+
+- uuid pre selecty cez Views
+- id pre DB
+- nove zaznami do DB
+- vygogoli breadcrumbs URL

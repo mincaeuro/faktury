@@ -20,13 +20,13 @@
 <!-- <button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
 <h1>Faktury online</h1>
 
-
+{{request.path}}
 <p> Jednoducha online faktracia</p>
 {% if Login_list %}
 {% for c in Login_list %}
 <p>Vitajte, {{ c.user }}.</p>
 {% endfor %}
-
+	
 {% else %}
 <div id="login">
         <form class="form-horizontal" name="LoginForm" action="/login/" method="post">
@@ -74,7 +74,7 @@
     </tbody>
 </table>
 {% else %}
-    <p>Ziadne vysledky.</p>
+    <p>Ziaden zaznam.</p>
 {% endif %}
 </div>
 </body>

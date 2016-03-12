@@ -4,7 +4,8 @@ import uuid
 
 
 class Login(models.Model):
-	id = models.AutoField(primary_key=True, blank=False)
+	id = models.AutoField(primary_key=True)
+	db_uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
 	user = models.CharField(blank=False, unique=True, max_length=50)
 	email = models.EmailField(blank=False)
 	password = models.CharField(blank=False, max_length=150)
@@ -12,7 +13,8 @@ class Login(models.Model):
 		return str(self.user)
 
 class Firma(models.Model):
-	id = models.AutoField(primary_key=True, blank=False)
+	id = models.AutoField(primary_key=True)
+	db_uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
 	creator = models.ForeignKey(Login, blank=False)
 	nazov = models.CharField(blank=False, max_length=200)
 	meno = models.CharField(blank=False, max_length=50)
@@ -31,10 +33,12 @@ class Firma(models.Model):
 	
 class Zakaznik(models.Model):
 	id = models.AutoField(primary_key=True)
+	db_uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
 	owner = models.ForeignKey(Login, blank=False)
 	creator = models.ForeignKey(Firma, blank=False)
 	nazov = models.CharField(blank=True, max_length=200)
 	meno = models.CharField(blank=True, max_length=50)
+	cislo = models.CharField(blank=True, max_length=50)
 	priezvisko = models.CharField(blank=True, max_length=50)
 	adresa_ulica = models.CharField(max_length=200)
 	adresa_mesto = models.CharField(max_length=90)
@@ -51,6 +55,7 @@ class Zakaznik(models.Model):
 	
 class Faktura(models.Model):
 	id = models.AutoField(primary_key=True)
+	db_uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
 	owner = models.ForeignKey(Login, blank=False)
 	creator = models.ForeignKey(Firma, blank=False)
 	created_for = models.ForeignKey(Zakaznik, blank=False)
@@ -67,10 +72,12 @@ class Faktura(models.Model):
 	
 class Polozky(models.Model):
 	id = models.AutoField(primary_key=True)
+	db_uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
 	owner = models.ForeignKey(Login, blank=False)
 	faktura = models.ForeignKey(Faktura, blank=False)
 	nazov = models.CharField(blank=False, max_length=300)
 	mnozstvo = models.CharField(blank=False, max_length=100)
+	kod = models.CharField(blank=True, max_length=100)
 	cena = models.CharField(blank=False, max_length=100)
 	def __unicode__(self):
 		return str(self.nazov)
