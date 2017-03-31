@@ -18,14 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
 	url(r'^', include('invoice.urls', namespace="invoice")),
-	url(r'^firma/', include('invoice.urls')),
-	url(r'^zakaznici/', include('invoice.urls')),
-	url(r'^detail/(?P<faktura_id>\d+)/', include('invoice.urls', namespace="detail")),
-	url(r'^detail/(?P<faktura_id>\d+)/edit/', include('invoice.urls', namespace="edit_detail")),
-	url(r'^firma/(?P<firma_id>\d+)/', include('invoice.urls')),
-	url(r'^zakaznik/(?P<zakaznik_id>\d+)/', include('invoice.urls')),
-	url(r'^faktury/', include('invoice.urls')),
-	url(r'^users/', include('invoice.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    	url(r'^admin/', include(admin.site.urls)),
 
 ]
