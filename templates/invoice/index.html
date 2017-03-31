@@ -22,14 +22,9 @@
 
 {{request.path}}
 <p> Jednoducha online faktracia</p>
-{% if Login_list %}
-{% for c in Login_list %}
-<p>Vitajte, {{ c.user }}.</p>
-{% endfor %}
-	
-{% else %}
+{% if user.is_authenticated %}
 <div id="login">
-        <form class="form-horizontal" name="LoginForm" action="/login/" method="post">
+        <form class="form-horizontal" name="LoginForm" action="/admin/login/" method="post">
         {% csrf_token %}
         {% if next %}
             <input type="hidden" name="next" value="{{ next }}" />
@@ -53,29 +48,31 @@
         </div>
         </form>
     </div>
-{% endif %}
 
-
-
-<h3>Zoznam vystavenych faktur:</h3>
-{% if Fakturas_list %}
-    <table class="table table-striped table-hover">
-    <thead>
-    <tr><th>Cislo</th><th>Datum vystavenia</th><th>Datum splatnosti</th><th>Vytvoril</th></tr>
-    </thead>
-    <tbody>
-    {% for b in Fakturas_list %}
-        <tr><td><a href="{% url 'invoice:detail' b.id %}">{{ b.cislo_faktury }}</a></td>
-        <td>{{b.datum_vystavenia}}</td>
-        <td>{{b.datum_splatnosti}}</td>
-        <td>{{ b.owner }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
 {% else %}
-    <p>Ziaden zaznam.</p>
+
+
+	<h3>Zoznam vystavenych faktur:</h3>
+	{% if Fakturas_list %}
+		<table class="table table-striped table-hover">
+		<thead>
+		<tr><th>Cislo</th><th>Datum vystavenia</th><th>Datum splatnosti</th><th>Vytvoril</th></tr>
+		</thead>
+		<tbody>
+		{% for b in Fakturas_list %}
+			<tr><td><a href="{% url 'invoice:detail' b.id %}">{{ b.cislo_faktury }}</a></td>
+			<td>{{ b.datum_vystavenia }}</td>
+			<td>{{ b.datum_splatnosti }}</td>
+			<td>{{ b.owner.user }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+		<p>Ziaden zaznam.</p>
+	{% endif %}
 {% endif %}
+
 </div>
 </body>
 

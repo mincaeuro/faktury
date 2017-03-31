@@ -1,7 +1,12 @@
 <!-- top nav -->
-<li><a href="/">Domov</a></li>
+<li><a href="/"><i class="glyphicon glyphicon-home"></i> Domov</a></li>
 <li{% if request.get_full_path == 'invoice:firmas_all' %} class="active" {% endif %}><a href="{% url 'invoice:firmas_all' %}">Moje Firmy</a></li>
 <li{% if request.get_full_path == 'invoice:zakaznik_all' %} class="active" {% endif %}><a href="{% url 'invoice:zakaznik_all' %}">Moji zakaznici</a></li>
 <li{% if request.get_full_path == 'invoice:faktury_all' %} class="active" {% endif %}><a href="{% url 'invoice:faktury_all' %}">Faktury</a></li>
 <li{% if request.get_full_path == 'invoice:firmas_all' %} class="active" {% endif %}><a href="/#">Nastavenia uctu</a></li>
-<li><a href="/admin">Admin</a></li>
+{% if user.is_authenticated %}
+<li><a href="/admin"><i class="glyphicon glyphicon-wrench"></i> Admin</a></li>
+<li><a href="/admin/logout/?next=/"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+{% else %}
+<li><a href="/admin/login/?next=/"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
+{% endif %}

@@ -38,7 +38,7 @@ def detail(request, faktura_id):
 	faktura = get_object_or_404(Faktura, pk=faktura_id)
 	polozky = Polozky.objects.filter(faktura=faktura_id)
 	#zakaznik = Zakaznik.objects.filter(faktura=faktura.db_uuid)
-	zakaznik = Zakaznik.objects.get(nazov=faktura.created_for)
+	zakaznik = Zakaznik.objects.get(faktura=faktura.id)
 	t = loader.get_template('invoice/details.html')
 	c = Context({'faktura': faktura, 'polozky': polozky, 'zakaznik': zakaznik})
 	return HttpResponse(t.render(c))
@@ -79,12 +79,10 @@ def edit_detail(request, faktura_id):
 	faktura = get_object_or_404(Faktura, pk=faktura_id)
 	try:
 		zmeny = faktura.cislo_faktury.get(pk=request.POST['komentar'])
-    	except (KeyError, Faktura.DoesNotExist):
-    	# Redisplay the question voting form.
+	except(KeyError, Faktura.DoesNotExist):
 			return render(request, 'invoice/details.html#letsedit', {
-            'faktura': faktura,
-						'error_message': "Chyba, ne-existujuci/neaktualny zaznam",
-        })
+				'faktura': faktura,'error_message': "Chyba, ne-existujuci/neaktualny zaznam",
+				})
 	else:
 				zmeny.edit_details += 1
 				zmeny.save()

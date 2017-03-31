@@ -4,7 +4,13 @@
 
 {% include "invoice/head.html" %}
 <title>Faktury zakaznika</title>
+<script>
+$(document).ready(function(){
+	$( "td.DPH:contains('platiDPH')").html("<span class='glyphicon glyphicon-euro' aria-hidden='true'></span> Plati DPH");
+	$( "td.DPH:contains('neplatcaDPH')").html("<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Neplati DPH");
+		});
 
+</script>
 </head>
 
 <body>
@@ -37,7 +43,7 @@
         <td>{{b.ico}}</td>
         <td>{{b.dic}}</td>
         <td>{{b.telefon}}</td>
-        <td>{{b.platca_DPH}}
+        <td class="DPH">{{ b.platca_DPH }}</td>
         </tr>
     {% endfor %}
     </tbody>

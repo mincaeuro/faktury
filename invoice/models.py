@@ -9,8 +9,8 @@ class Login(models.Model):
 	user = models.CharField(blank=False, unique=True, max_length=50)
 	email = models.EmailField(blank=False)
 	password = models.CharField(blank=False, max_length=150)
-	def __unicode__(self):
-		return str(self.user)
+	def __str__(self):
+		return self.user
 
 class Firma(models.Model):
 	id = models.AutoField(primary_key=True)
@@ -23,13 +23,13 @@ class Firma(models.Model):
 	dic = models.CharField(blank=False, max_length=50)
 	banka = models.CharField(blank=False, max_length=100)
 	cislo_uctu = models.CharField(blank=False, max_length=100)
-	platca_DPH = models.CharField(choices=[("a", "ano"),("n", "nie")], max_length=1)
+	platca_DPH = models.CharField(choices=[("platiDPH", "ano"),("neplatcaDPH", "nie")], max_length=11)
 	telefon = models.CharField(max_length=50)
 	adresa_ulica = models.CharField(max_length=200)
 	adresa_mesto = models.CharField(max_length=90)
 	adresa_PSC = models.CharField(max_length=20)
-	def __unicode__(self):
-		return str(self.nazov)
+	def __str__(self):
+		return self.nazov
 	
 class Zakaznik(models.Model):
 	id = models.AutoField(primary_key=True)
@@ -50,8 +50,8 @@ class Zakaznik(models.Model):
 	cislo_uctu = models.CharField(blank=False, max_length=100)
 	email = models.EmailField(blank=False)
 	telefon = models.CharField(max_length=50)
-	def __unicode__(self):
-		return str(self.nazov)
+	def __str__(self):
+		return self.nazov
 	
 class Faktura(models.Model):
 	id = models.AutoField(primary_key=True)
@@ -66,8 +66,8 @@ class Faktura(models.Model):
 	konstantny_symbol = models.CharField(blank=False, max_length=150)
 	doprava = models.CharField(blank=True, max_length=150)
 	komentar = models.TextField(max_length=3000)
-	def __unicode__(self):
-		return str(self.cislo_faktury)
+	def __str__(self):
+		return self.cislo_faktury
 	
 	
 class Polozky(models.Model):
@@ -79,7 +79,7 @@ class Polozky(models.Model):
 	mnozstvo = models.CharField(blank=False, max_length=100)
 	kod = models.CharField(blank=True, max_length=100)
 	cena = models.CharField(blank=False, max_length=100)
-	def __unicode__(self):
-		return str(self.nazov)
+	def __str__(self):
+		return self.nazov
 
 
