@@ -39,12 +39,11 @@
     {% for x in zoznam.all %}
     <tr><td><a href="{% url 'invoice:detail' x.id %}">{{x.cislo_faktury}}</a></td><td>{{x.datum_vystavenia}}</td><td>{{x.datum_splatnosti}}</td></tr>
     {% endfor %}
+	</tbody>
+</table>
        {% else %}
     <p>Ziaden zaznam.</p>
 {% endif %} 
-        
-       
-
 </div>
 </body>
 

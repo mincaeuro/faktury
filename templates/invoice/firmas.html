@@ -26,7 +26,6 @@ $(document).ready(function(){
  <ol class="breadcrumb">
   <li><a href="/">Domov</a></li>
   <li class="active">Firmy</li>
-
 </ol>
 <!-- <button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
 <h1>Zoznam mojich firiem</h1>
@@ -46,8 +45,8 @@ $(document).ready(function(){
         <td class="DPH">{{ b.platca_DPH }}</td>
         </tr>
     {% endfor %}
-    </tbody>
-</table>
+	</tbody>
+	</table>
 {% else %}
     <p>Ziadne zaznamy.</p>
 {% endif %}

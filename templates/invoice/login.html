@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+{% include "invoice/head.html" %}
+
+<title>Faktury zakaznika</title>
+
+</head>
+
+<body>
+<div class="container-fluid">
+<nav class="navbar navbar-default navbar-tall navbar-full" role="navigation">
+  <div class="navbar-header">
+<ul class="nav navbar-nav">
+{% include "invoice/nav.html" %}
+</ul>
+  </div>
+ </nav>
+<!-- <button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
+<h1>Faktury online</h1>
+
+
+<p> Jednoducha online faktracia</p>
+{% if not Login.is_authenticated %}
+<div id="login">
+   <form class="form-horizontal" name="LoginForm" action="/login/" method="post">
+		{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="login btn-default"><i class="fa fa-save"></i> Login</button>
+    </form>
+    </div>
+
+{% endif %}
+
+
+</div>
+</body>
+
+</html>

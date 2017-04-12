@@ -8,14 +8,15 @@
 .btn {float:right;}
 
 @media print
-{	
-.breadcrumb{ visibility: hidden; }
-h1{ visibility: hidden; }
-h2 {text-align:center; text-decoration:underline; padding-bottom:30px;}
-.nav{ visibility: hidden; }
-.btn{ visibility: hidden; }
-.navbar-header { visibility: hidden; }
-#InvoiceContent { position: absolute; top: 40px; left: 30px; }
+{
+body {font-family:Arial}
+.breadcrumb{display:none;}
+h1 {padding-bottom:30px;color:gray; float:right; position:absolute: z-index:1}
+.nav{display:none;}
+.btn{display:none;}
+.navbar-header {display:none;}
+.dodavatel {float:left; position:absolute: z-index:1;}
+.odbetratel {float:right; position:absolute: z-index:1; padding-right:190px}
 }
 </style>
 <script>
@@ -47,26 +48,37 @@ function printMe(){
 
 </ol>
 <!--<button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
+<button type="button" class="btn" title="Vytlacit fakturu c. {{faktura.cislo_faktury}} " onclick="printMe()"><i class="glyphicon glyphicon-print"></i></button>
 
-<h1>{{ faktura.creator.nazov }}</h1><p><button type="button" class="btn" onclick="printMe()"><i class="glyphicon glyphicon-print"></i></button> </p>
-<h2>Detail Faktury cislo: {{faktura.cislo_faktury}}</h2>
+<h1>Faktura: {{faktura.cislo_faktury}}</h1>
 <div id="details">
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<div class="col-lg-6">
-        <h4><b>Dodavatel:</b> {{ faktura.creator.nazov }}</h4>
-        <h4><b>Datum:</b> {{faktura.datum_vystavenia}}</h4>
+<div class="row">
+<div class="col-lg-6 dodavatel">
+        <h3><b>Dodavatel:</b></h3>
+        <h4>{{ faktura.creator.nazov }}</h4>
+        <h4><b>ICO:</b> {{ faktura.creator.ico }}</h4>
+        <h4><b>DIC:</b> {{ faktura.creator.dic }}</h4>
+		<hr class="soften"/>
+        <h4><b>Bankove udaje:</b></h4>
+		<h4>{{ faktura.creator.banka }}</h4>
+        <h4>{{ faktura.creator.cislo_uctu }}</h4>
+		<hr class="soften"/>
+        <h4><b>Datum vystavenia:</b> {{faktura.datum_vystavenia}}</h4>
         <h4><b>Datum splatnosti:</b> {{faktura.datum_splatnosti}}</h4>
+		<hr class="soften"/>
         <h5><b>Komentar:</b></h5>
         <p>{{faktura.komentar}}</p>
-
+		<hr class="soften"/>
 </div>	
-<div class="col-lg-6"> 
-<h4>Odbetratel:</h4> <p>{{zakaznik.nazov}}</p>
-<h4>Meno:</h4> <p>{{zakaznik.meno}}</p>
-<h4>Priezvisko:</h4> <p>{{zakaznik.priezvisko}}</p>
-	
+<div class="col-lg-6 odbetratel"> 
+<h3><b>Odbetratel:</b></h3>
+<p>{{zakaznik.nazov}}</p>
+<h4><b>Meno:</b></h4>
+<p>{{zakaznik.meno}} {{zakaznik.priezvisko}}</p>
+<p>{{zakaznik.adresa_ulica}} <br /> {{zakaznik.adresa_mesto}} <br /> {{zakaznik.adresa_psc}}</p>
 </div>
-    
+  </div>  
 
 {% if polozky %}
 
@@ -79,25 +91,17 @@ function printMe(){
 		 
 		
 {% endfor %}
-
+</tbody></table>
 {% else %}
     <p>Ziaden zaznam.</p>
 {% endif %}
-</tbody>
+
  
        
 </div>
 
-
-
-
-
-
-
 </div>
 
-
-</div>
 
 
 </body>
