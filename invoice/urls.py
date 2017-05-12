@@ -12,5 +12,4 @@ urlpatterns = [
 	url(r'^detail/(?P<faktura_id>\d+)/edit/', views.edit_detail, name='edit_detail'),
 	url(r'^firma/(?P<firma_id>\d+)/', views.firma, name='firma'),
 	url(r'^zakaznik/(?P<zakaznik_id>\d+)/', views.zakaznik, name='zakaznik'),
-	url(r'^login/$', views.index, name='index'),
 ]

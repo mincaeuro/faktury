@@ -9,14 +9,8 @@
 </head>
 
 <body>
-<div class="container-fluid">
-<nav class="navbar navbar-default navbar-tall navbar-full" role="navigation">
-  <div class="navbar-header">
-<ul class="nav navbar-nav">
-{% include "invoice/nav.html" %}
-</ul>
-  </div>
- </nav>
+{% include "invoice/nav.html" %}<div class="container-fluid">
+	
  <ol class="breadcrumb">
   <li><a href="/">Domov</a></li>
   <li class="active">Zakaznici</li>
@@ -27,7 +21,7 @@
 <h1>Zoznam Zakaznikov</h1>
 
 {% if zakaznik_list %}
-    <table class="table table-striped table-hover">
+    <div class="table-responsive"><table class="table table-striped table-hover">
     <thead>
     <tr>
     <th>Nazov</th><th>Adresa</th><th>ICO</th><th>DIC</th><th>ICDPH</th><th>Bankove spojenie</th><th>Telefon</th><th>Email</th>
@@ -46,7 +40,7 @@
         </tr>
     {% endfor %}
     </tbody>
-</table>
+</table></div>
 {% else %}
     <p>Ziadne vysledky.</p>
 {% endif %}

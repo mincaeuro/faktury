@@ -9,25 +9,25 @@
 </head>
 
 <body>
-<div class="container-fluid">
-<nav class="navbar navbar-default navbar-tall navbar-full" role="navigation">
-  <div class="navbar-header">
-<ul class="nav navbar-nav">
-{% include "invoice/nav.html" %}
-</ul>
-  </div>
- </nav>
-<!-- <button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
+
+	{% include "invoice/nav.html" %}
+	<div class="container-fluid">
+
 <h1>Faktury online</h1>
 
 
 <p> Jednoducha online faktracia</p>
-{% if not Login.is_authenticated %}
-<div id="login">
-   <form class="form-horizontal" name="LoginForm" action="/login/" method="post">
+{% if not user.is_authenticated %}
+<p>Prihlasovaci formular:</p>
+<div id="login" class="bd-example">
+   <form name="LoginForm" action="/login/" method="post">
+   <div class="form-group">
 		{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="login btn-default"><i class="fa fa-save"></i> Login</button>
+		<div class="form-group row"><label for="username">Meno</label><div class="col-10"><input type="text" class="form-control" name="username" id="username" /></div></div>
+		<div class="form-group row"><label for="password">Heslo</label><div class="col-10"><input type="password" class="form-control" name="password" /></div></div>
+        {{ forms.as_p }}
+	</div>
+        <button type="submit" class="save btn"><i class="glyphicon glyphicon-log-in"></i> Log in</button>
     </form>
     </div>
 

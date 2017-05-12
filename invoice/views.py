@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader, RequestContext
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect
@@ -12,40 +12,33 @@ from django.contrib.auth import authenticate, login, logout
 from .models import *
 from .forms import LoginForm
 
-def log_in(request):
-	logout(request)
-	username = password = ''
-	if request.POST:
-		username = request.POST['username']
-		password = request.POST['password']
-		user = authenticate(username=username, password=password)
-		if user is not None:
-			if user.is_active:
-				login(request, user)
-				return HttpResponseRedirect('/')
-	return render_to_response('invoice/login.html', form=RequestContext(request))
-
 
 def index(request):
 	Fakturas_list = Faktura.objects.all()
 	Login_list = Login.objects.all()
-	t = loader.get_template('invoice/index.html')
-	c = Context({'Fakturas_list': Fakturas_list, 'Login_list': Login_list})
-	return HttpResponse(t.render(c))
+	return render(request, 'invoice/index.html', {'Fakturas_list': Fakturas_list, 'Login_list': Login_list, 'form': LoginForm})
 
-def login(request):
-    logout(request)
-    username = password = ''
-    if request.POST:
-        username = request.POST['email']
-        password = request.POST['password']
+	
+####custom login - not in use
 
-        user = authenticate(username=user, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/')
-    return render_to_response('index.html', context_instance=RequestContext(request))
+def log_in(request):
+	if request.method == 'POST':
+		form = LoginForm(request.POST or None)
+		if form.is_valid():
+			username = User.objects.get(email=form.cleaned_data['email'])
+			password = form.cleaned_data['password']
+			user = authenticate(username=username, password=password)
+			if user:
+				if user.is_active:
+					auth_login(request, user)
+					return render(request, 'invoice/index.html', {'Fakturas_list': Fakturas_list, 'Login_list': Login_list})
+			else:
+				form = LoginForm(request.POST or None)
+			return HttpResponseRedirect('/?there_you_go')
+	else:
+		form = LoginForm(request.POST or None)
+	return HttpResponseRedirect('/?no_login_requested')
+
 
 @login_required(login_url='/logmein/')
 def detail(request, faktura_id):

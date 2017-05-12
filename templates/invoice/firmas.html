@@ -14,14 +14,8 @@ $(document).ready(function(){
 </head>
 
 <body>
-<div class="container-fluid">
-<nav class="navbar navbar-default navbar-tall navbar-full" role="navigation">
-  <div class="navbar-header">
-<ul class="nav navbar-nav">
-{% include "invoice/nav.html" %}
-</ul>
-  </div>
- </nav>
+{% include "invoice/nav.html" %}<div class="container-fluid">
+	
 
  <ol class="breadcrumb">
   <li><a href="/">Domov</a></li>
@@ -30,10 +24,8 @@ $(document).ready(function(){
 <!-- <button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
 <h1>Zoznam mojich firiem</h1>
 
-
-
 {% if Firmas_list %}
-    <table class="table table-striped table-hover"><thead>
+    <div class="table-responsive"><table class="table table-striped table-hover"><thead>
     <tr><th>Nazov</th><th>ICO</th><th>DIC</th><th>Telefon</th><th>Platca DPH</th></tr>
     </thead>
     <tbody>
@@ -46,7 +38,7 @@ $(document).ready(function(){
         </tr>
     {% endfor %}
 	</tbody>
-	</table>
+	</table></div>
 {% else %}
     <p>Ziadne zaznamy.</p>
 {% endif %}
