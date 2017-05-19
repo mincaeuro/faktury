@@ -7,7 +7,6 @@ from django.template.context_processors import csrf
 from django.contrib.auth import authenticate, login, logout
 
 
-
 # Create your views here.
 from .models import *
 from .forms import LoginForm

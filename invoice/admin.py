@@ -36,7 +36,7 @@ class FirmaAdm(admin.ModelAdmin):
 		(None, {'fields': ['creator']}),
 		('Udaje Firmy', {'fields': ['nazov', 'meno', 'priezvisko', 'telefon', 'ico', 'dic', 'platca_DPH']}),
 		('Adresa', {'fields': ['adresa_ulica', 'adresa_mesto', 'adresa_PSC']}),
-		('Bankove spojenie', {'fields': ['banka', 'cislo_uctu']}),
+		('Bankove spojenie', {'fields': ['banka', 'cislo_swift', 'cislo_uctu']}),
 				]
 	inlines = [FirmaInline]
 	list_display = ('nazov', 'meno', 'telefon')

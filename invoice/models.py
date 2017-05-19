@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from django.core.validators import RegexValidator
 # Create your models here.
 
 
@@ -12,6 +13,8 @@ class Login(models.Model):
 	def __str__(self):
 		return self.user
 
+
+		
 class Firma(models.Model):
 	id = models.AutoField(primary_key=True)
 	db_uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
@@ -22,7 +25,18 @@ class Firma(models.Model):
 	ico = models.CharField(blank=False, max_length=50)
 	dic = models.CharField(blank=False, max_length=50)
 	banka = models.CharField(blank=False, max_length=100)
-	cislo_uctu = models.CharField(blank=False, max_length=100)
+	alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Zadajte cislo vo formate IBAN')
+	cislo_uctu = models.CharField(blank=False, max_length=24, validators=[alphanumeric])
+	banky=(
+		('', 'vyberte'),
+		('SUBASKBX', 'Všeobecná úverová banka, a. s.'),
+		('GIBASKBX', 'Slovenská sporiteľňa, a. s.'),
+		('TATRSKBX', 'Tatra banka, a. s.'),
+		('BREXSKBX', 'MBANK – BRE Bank SA, pobočka zahraničnej banky mBank v SR'),
+		('UNCRSKBX', 'UniCredit Bank Czech Republic and Slovakia, a. s., pobočka zahr. banky'),
+		('CEKOSKBX', 'ČSOB – Československá obchodná banka, a.s.'),
+	)
+	cislo_swift = models.CharField(max_length=8,choices=banky,default='', blank=False)
 	platca_DPH = models.CharField(choices=[("platiDPH", "ano"),("neplatcaDPH", "nie")], max_length=11)
 	telefon = models.CharField(max_length=50)
 	adresa_ulica = models.CharField(max_length=200)
