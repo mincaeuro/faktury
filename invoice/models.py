@@ -1,7 +1,7 @@
-# -- coding: utf-8
 from django.db import models
 import uuid
 from django.core.validators import RegexValidator
+from django.db.models import Sum, F
 # Create your models here.
 
 
@@ -38,7 +38,7 @@ class Firma(models.Model):
 		('CEKOSKBX', 'ČSOB – Československá obchodná banka, a.s.'),
 	)
 	cislo_swift = models.CharField(max_length=8,choices=banky,default='', blank=False)
-	platca_DPH = models.CharField(choices=[("platiDPH", "ano"),("neplatcaDPH", "nie")], max_length=11)
+	platca_DPH = models.CharField(choices=[("20", "ano"),("0", "nie")], max_length=2)
 	telefon = models.CharField(max_length=50)
 	adresa_ulica = models.CharField(max_length=200)
 	adresa_mesto = models.CharField(max_length=90)
@@ -90,10 +90,15 @@ class Polozky(models.Model):
 	db_uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
 	owner = models.ForeignKey(Login, blank=False)
 	faktura = models.ForeignKey(Faktura, blank=False)
+	dan = models.DecimalField(blank=False, max_digits=20, decimal_places=2)
 	nazov = models.CharField(blank=False, max_length=300)
-	mnozstvo = models.CharField(blank=False, max_length=100)
+	mnozstvo = models.IntegerField(blank=False)
 	kod = models.CharField(blank=True, max_length=100)
-	cena = models.CharField(blank=False, max_length=100)
+	cena = models.DecimalField(blank=False, max_digits=20, decimal_places=2)
+	
+	def spolu(self):
+		return self.mnozstvo * self.cena
+	spocitaj = models.IntegerField(spolu, editable=False)
 	def __str__(self):
 		return self.nazov
 

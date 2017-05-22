@@ -82,14 +82,15 @@ function printMe(){
 {% if polozky %}
 
          <div class="table-responsive"><table class="table table-striped table-hover"><thead>
-			 <tr><th colspan="3">Polozky</th></tr></thead>
+			 <tr><th colspan="5">Polozky</th></tr></thead>
          <tbody>
-    <tr><th>Nazov</th><th>mnozstvo</th><th>cena</th></tr>
+    <tr><th>Nazov</th><th>mnozstvo</th><th>cena</th><th>Dan</th><th>Spolu</th></tr>
             {% for x in polozky.all %}
-   		 <tr><td>{{ x.nazov }}</td><td>{{x.mnozstvo}}</td><td>{{x.cena}}</td></tr>
-		 
+   		 <tr><td>{{ x.nazov }}</td><td>{{x.mnozstvo}}</td><td>{{x.cena}}</td> <td>{{x.dan}} %</td><td>{{ x.spolu }}</td></tr>
+		
 		
 {% endfor %}
+<tr><td colspan="4">Spolu total</td><td> euri</td></tr>
 </tbody></table></div>
 {% else %}
     <p>Ziaden zaznam.</p>
