@@ -2,44 +2,53 @@
 <html>
 <head>
 
-{% include "invoice/head.html" %}
-<title>Faktury vseobecne</title>
+    {% include "invoice/head.html" %}
+    <title>Faktury vseobecne</title>
 
 </head>
 
 <body>
-{% include "invoice/nav.html" %}<div class="container-fluid">
-	
-
- <ol class="breadcrumb">
-  <li><a href="/">Domov</a></li>
-  <li class="active">Faktury</li>
-
-</ol>
-<!-- <button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
-<h1>Zoznam mojich faktur</h1>
+{% include "invoice/nav.html" %}
+<div class="container-fluid">
 
 
+    <ol class="breadcrumb">
+        <li><a href="/">Domov</a></li>
+        <li class="active">Faktury</li>
 
-{% if Fakturas_list %}
-    <div class="table-responsive"><table class="table table-striped table-hover">
-    <thead>
-    <tr><th>Cislo</th><th>Datum vystavenia</th><th>Datum splatnosti</th><th>Vytvoril</th><th>Zakaznik</th></tr>
-    </thead>
-    <tbody>
-    {% for b in Fakturas_list %}
-        <tr><td><a href="{% url 'invoice:detail' b.id %}">{{ b.cislo_faktury }}</a></td>
-        <td>{{b.datum_vystavenia}}</td>
-        <td>{{b.datum_splatnosti}}</td>
-        <td>{{ b.creator }}</td>
-        <td>{{b.created_for.nazov}}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table></div>
-{% else %}
+    </ol>
+    <!-- <button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
+    <h1>Zoznam mojich faktur</h1>
+
+
+    {% if Fakturas_list %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Cislo</th>
+                <th>Datum vystavenia</th>
+                <th>Datum splatnosti</th>
+                <th>Vytvoril</th>
+                <th>Zakaznik</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for b in Fakturas_list %}
+            <tr>
+                <td><a href="{% url 'invoice:detail' b.id %}">{{ b.cislo_faktury }}</a></td>
+                <td>{{b.datum_vystavenia}}</td>
+                <td>{{b.datum_splatnosti}}</td>
+                <td>{{ b.creator }}</td>
+                <td>{{b.created_for.nazov}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
     <p>Ziadne zaznamy.</p>
-{% endif %}
+    {% endif %}
 </div>
 </body>
 

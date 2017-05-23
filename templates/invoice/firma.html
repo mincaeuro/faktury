@@ -1,43 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-{% include "invoice/head.html" %}
-<title>Faktura {{firma}}</title>
+    {% include "invoice/head.html" %}
+    <title>Faktura {{firma}}</title>
 
 </head>
 
 <body>
-	{% include "invoice/nav.html" %}
+{% include "invoice/nav.html" %}
 <div class="container-fluid">
 
-<ol class="breadcrumb">
-  <li><a href="/">Domov</a></li>
-  <li><a href="{% url 'invoice:firmas_all' %}">Firmy</a></li>
-  <li class="active">Firma</li>
+    <ol class="breadcrumb">
+        <li><a href="/">Domov</a></li>
+        <li><a href="{% url 'invoice:firmas_all' %}">Firmy</a></li>
+        <li class="active">Firma</li>
 
-</ol>
-<!--<button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
-<h1>Detail Firmy: {{firma}}</h1>
-        <p>
-        Nazov: {{firma.nazov}} <br />
-        Meno: {{firma.meno}}, {{firma.priezvisko}}<br />
-        ico: {{firma.ico}}<br />
-        dic: {{firma.dic}}<br />
+    </ol>
+    <!--<button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
+    <h1>Detail Firmy: {{firma}}</h1>
+    <p>
+        Nazov: {{firma.nazov}} <br/>
+        Meno: {{firma.meno}}, {{firma.priezvisko}}<br/>
+        ico: {{firma.ico}}<br/>
+        dic: {{firma.dic}}<br/>
         bankove udaje: {{firma.cislo_uctu}}, {{firma.banka}}
-        </p>
-	{% if zoznam %}
-	<div class="table-responsive"><table class="table table-striped table-hover"><thead>
-		<tr><th colspan="3">Faktury</th></tr></thead>
-	<tbody>
-	<tr><th>cislo</th><th>datum</th><th>datum splatnosti</th></tr>
-	{% for x in zoznam.all %}
-	<tr><td><a href="{% url 'invoice:detail' x.id %}">{{x.cislo_faktury}}</a></td><td>{{x.datum_vystavenia}}</td><td>{{x.datum_splatnosti}}</td></tr>
-		{% endfor %}
-	{% else %}
-	<p>Ziaden zaznam.</p>
-{% endif %} 
-    </tbody>
-</table></div>   
+    </p>
+    {% if zoznam %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th colspan="3">Faktury</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>cislo</th>
+                <th>datum</th>
+                <th>datum splatnosti</th>
+            </tr>
+            {% for x in zoznam.all %}
+            <tr>
+                <td><a href="{% url 'invoice:detail' x.id %}">{{x.cislo_faktury}}</a></td>
+                <td>{{x.datum_vystavenia}}</td>
+                <td>{{x.datum_splatnosti}}</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <p>Ziaden zaznam.</p>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
 
 </div>
 </body>

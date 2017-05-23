@@ -2,46 +2,58 @@
 <html>
 <head>
 
-{% include "invoice/head.html" %}
-<title>Faktury zakaznika</title>
-<script>
+    {% include "invoice/head.html" %}
+    <title>Faktury zakaznika</title>
+    <script>
 $(document).ready(function(){
 	$( "td.DPH:contains('platiDPH')").html("<span class='glyphicon glyphicon-euro' aria-hidden='true'></span> Plati DPH");
 	$( "td.DPH:contains('neplatcaDPH')").html("<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Neplati DPH");
 		});
 
-</script>
+
+    </script>
 </head>
 
 <body>
-{% include "invoice/nav.html" %}<div class="container-fluid">
-	
+{% include "invoice/nav.html" %}
+<div class="container-fluid">
 
- <ol class="breadcrumb">
-  <li><a href="/">Domov</a></li>
-  <li class="active">Firmy</li>
-</ol>
-<!-- <button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
-<h1>Zoznam mojich firiem</h1>
 
-{% if Firmas_list %}
-    <div class="table-responsive"><table class="table table-striped table-hover"><thead>
-    <tr><th>Nazov</th><th>ICO</th><th>DIC</th><th>Telefon</th><th>Platca DPH</th></tr>
-    </thead>
-    <tbody>
-    {% for b in Firmas_list %}
-        <tr><td><a href="/firma/{{ b.id }}">{{ b.nazov }}</a></td>
-        <td>{{b.ico}}</td>
-        <td>{{b.dic}}</td>
-        <td>{{b.telefon}}</td>
-        <td class="DPH">{{ b.platca_DPH }}</td>
-        </tr>
-    {% endfor %}
-	</tbody>
-	</table></div>
-{% else %}
+    <ol class="breadcrumb">
+        <li><a href="/">Domov</a></li>
+        <li class="active">Firmy</li>
+    </ol>
+    <!-- <button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
+    <h1>Zoznam mojich firiem</h1>
+
+    {% if Firmas_list %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Nazov</th>
+                <th>ICO</th>
+                <th>DIC</th>
+                <th>Telefon</th>
+                <th>Platca DPH</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for b in Firmas_list %}
+            <tr>
+                <td><a href="/firma/{{ b.id }}">{{ b.nazov }}</a></td>
+                <td>{{b.ico}}</td>
+                <td>{{b.dic}}</td>
+                <td>{{b.telefon}}</td>
+                <td class="DPH">{{ b.platca_DPH }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
     <p>Ziadne zaznamy.</p>
-{% endif %}
+    {% endif %}
 </div>
 </body>
 

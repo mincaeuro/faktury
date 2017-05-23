@@ -1,44 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-{% include "invoice/head.html" %}
-<title>Detail zakaznika: {{zakaznik.nazov}}</title>
+    {% include "invoice/head.html" %}
+    <title>Detail zakaznika: {{zakaznik.nazov}}</title>
 
 </head>
 
 <body>
-	{% include "invoice/nav.html" %}
+{% include "invoice/nav.html" %}
 <div class="container-fluid">
 
-<ol class="breadcrumb">
-  <li><a href="/">Domov</a></li>
-  <li><a href="{% url 'invoice:zakaznik_all' %}">Zakaznici</a></li>
-  <li class="active">Zakaznik</li>
+    <ol class="breadcrumb">
+        <li><a href="/">Domov</a></li>
+        <li><a href="{% url 'invoice:zakaznik_all' %}">Zakaznici</a></li>
+        <li class="active">Zakaznik</li>
 
-</ol>
-<!--<button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
-<h1>Detail: {{zakaznik.nazov}}</h1>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    </ol>
+    <!--<button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
+    <h1>Detail: {{zakaznik.nazov}}</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-{% if zoznam %}
-        <p>
-        Nazov: {{ zakaznik.meno }}, {{ zakaznik.priezvisko }}<br />
-        Adresa: {{zakaznik.adresa_ulica}}, {{ zakaznik.adresa_mesto }}, {{ zakaznik.adresa_psc }}<br />
-        c. uctu: {{zakaznik.cislo_uctu}}<br />
+    {% if zoznam %}
+    <p>
+        Nazov: {{ zakaznik.meno }}, {{ zakaznik.priezvisko }}<br/>
+        Adresa: {{zakaznik.adresa_ulica}}, {{ zakaznik.adresa_mesto }}, {{ zakaznik.adresa_psc }}<br/>
+        c. uctu: {{zakaznik.cislo_uctu}}<br/>
         email: {{zakaznik.email}}
-        </p>
-        <div class="table-responsive"><table class="table table-striped table-hover"><thead>
-			 <tr><th colspan="3">Faktury</th></tr></thead>
-         <tbody>
-    <tr><th>cislo</th><th>datum</th><th>datum splatnosti</th></tr>
-    {% for x in zoznam.all %}
-    <tr><td><a href="{% url 'invoice:detail' x.id %}">{{x.cislo_faktury}}</a></td><td>{{x.datum_vystavenia}}</td><td>{{x.datum_splatnosti}}</td></tr>
-    {% endfor %}
-	</tbody>
-</table></div>
-       {% else %}
+    </p>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th colspan="3">Faktury</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>cislo</th>
+                <th>datum</th>
+                <th>datum splatnosti</th>
+            </tr>
+            {% for x in zoznam.all %}
+            <tr>
+                <td><a href="{% url 'invoice:detail' x.id %}">{{x.cislo_faktury}}</a></td>
+                <td>{{x.datum_vystavenia}}</td>
+                <td>{{x.datum_splatnosti}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
     <p>Ziaden zaznam.</p>
-{% endif %} 
+    {% endif %}
 </div>
 </body>
 
