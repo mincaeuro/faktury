@@ -108,7 +108,7 @@ function printMe(){
                     <td>{{x.mnozstvo}}</td>
                     <td>{{x.cena}}</td>
                     <td>{{x.dan}}</td>
-                    <td>{{ x.spolu }}</td>
+                    <td>{{ x.spolu|floatformat:2 }}</td>
                 </tr>
                 {% endfor %}
                 <tr>

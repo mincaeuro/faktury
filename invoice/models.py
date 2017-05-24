@@ -99,7 +99,7 @@ class Polozky(models.Model):
     faktura = models.ForeignKey(Faktura, blank=False)
     dan = models.DecimalField(blank=False, max_digits=20, decimal_places=2)
     nazov = models.CharField(blank=False, max_length=300)
-    mnozstvo = models.IntegerField(blank=False)
+    mnozstvo = models.DecimalField(blank=False, max_digits=20, decimal_places=2)
     kod = models.CharField(blank=True, max_length=100)
     cena = models.DecimalField(blank=False, max_digits=20, decimal_places=2)
 
