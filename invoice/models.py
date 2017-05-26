@@ -1,9 +1,8 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 import uuid
 from django.core.validators import RegexValidator
 from django.db.models import Sum, F
-
-
 # Create your models here.
 
 
