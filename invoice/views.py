@@ -15,8 +15,9 @@ from .forms import LoginForm
 def index(request):
     Fakturas_list = Faktura.objects.all()
     Login_list = Login.objects.all()
+    sucet_list = Polozky.objects.all()#.aggregate(total=Sum(F('mnozstvo') * F('cena')))['total']
     return render(request, 'invoice/index.html',
-                  {'Fakturas_list': Fakturas_list, 'Login_list': Login_list, 'form': LoginForm})
+                  {'Fakturas_list': Fakturas_list, 'Login_list': Login_list, 'form': LoginForm, 'sucet_list': sucet_list})
 
 
 ####custom login - not in use

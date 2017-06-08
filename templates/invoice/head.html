@@ -31,7 +31,31 @@ window.cookieconsent.initialise({
   "theme": "edgeless"
 })});
 </script>
+<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
 
+window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer", {
+		theme: "theme2",//theme1
+		title:{
+			text: "Prehlad poloziek"
+		},
+		animationEnabled: true,   // change to true
+		data: [
+		{
+			// Change type to "bar", "area", "spline", "pie",etc.
+			type: "<pie></pie>",
+			dataPoints: [
+            {% for x in sucet_list %}
+                { label: "{{ x.nazov }}", y: {% widthratio x.cena 1 x.mnozstvo %}  },
+            {% endfor %}
+			]
+		}
+		]
+	});
+	chart.render();
+}
+</script>
 <style>
 body { padding-top: 70px; }
 @media only screen and (min-device-width: 768px) {#login{width:20%}}
