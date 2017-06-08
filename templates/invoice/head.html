@@ -44,7 +44,7 @@ window.onload = function () {
 		data: [
 		{
 			// Change type to "bar", "area", "spline", "pie",etc.
-			type: "<pie></pie>",
+			type: "pie",
 			dataPoints: [
             {% for x in sucet_list %}
                 { label: "{{ x.nazov }}", y: {% widthratio x.cena 1 x.mnozstvo %}  },
