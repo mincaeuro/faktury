@@ -86,6 +86,7 @@ class Faktura(models.Model):
     datum_dodania = models.DateField(blank=False)
     konstantny_symbol = models.CharField(blank=False, max_length=150)
     doprava = models.CharField(blank=True, max_length=150)
+    uhradena = models.CharField(choices=[("1", "ano"), ("0", "nie")], max_length=1, default=0)
     komentar = models.TextField(max_length=3000)
 
     def __str__(self):

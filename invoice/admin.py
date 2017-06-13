@@ -50,6 +50,7 @@ class FakturaAdm(admin.ModelAdmin):
 		('Zakaznik', {'fields': ['created_for']}), 
 		('Cislo Faktury', {'fields': ['cislo_faktury']}),
 		('Udaje', {'fields': ['datum_vystavenia', 'datum_splatnosti', 'datum_dodania', 'konstantny_symbol', 'doprava', 'komentar']}),
+		('Uhrada faktury', {'fields': ['uhradena']}),
 				]
 	inlines = [FakturaInline]
 	list_display = ('cislo_faktury', 'datum_vystavenia', 'created_for')

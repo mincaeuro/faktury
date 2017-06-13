@@ -3,6 +3,13 @@
 <head>
 
     {% include "invoice/head.html" %}
+
+    <script>
+$(document).ready(function(){
+	$( "td.PAY:contains('0')").html("<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Neuhradene");
+	$( "td.PAY:contains('1')").html("<span class='glyphicon glyphicon-check' aria-hidden='true'></span> Uhradene");
+		});
+    </script>
     <title>Faktury vseobecne</title>
 
 </head>
@@ -31,6 +38,7 @@
                 <th>Datum splatnosti</th>
                 <th>Vytvoril</th>
                 <th>Zakaznik</th>
+                <th>Uhradena</th>
             </tr>
             </thead>
             <tbody>
@@ -39,8 +47,9 @@
                 <td><a href="{% url 'invoice:detail' b.id %}">{{ b.cislo_faktury }}</a></td>
                 <td>{{b.datum_vystavenia}}</td>
                 <td>{{b.datum_splatnosti}}</td>
-                <td>{{ b.creator }}</td>
+                <td>{{b.creator }}</td>
                 <td>{{b.created_for.nazov}}</td>
+                <td class="PAY">{{b.uhradena}}</td>
             </tr>
             {% endfor %}
             </tbody>
