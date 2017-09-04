@@ -4,6 +4,7 @@ from django.template import Context, loader, RequestContext
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect
 from django.template.context_processors import csrf
+from django.template.loader import render_to_string
 from django.contrib.auth import authenticate, login, logout
 from decimal import Decimal
 
@@ -49,51 +50,51 @@ def detail(request, faktura_id):
     # zakaznik = Zakaznik.objects.filter(faktura=faktura.db_uuid)
     zakaznik = Zakaznik.objects.get(faktura=faktura.id)
     sucet = Polozky.objects.filter(faktura=faktura_id).aggregate(total=Sum(F('mnozstvo') * F('cena')))['total']
-    t = loader.get_template('invoice/details.html')
-    c = Context({'faktura': faktura, 'polozky': polozky, 'zakaznik': zakaznik, 'sucet': sucet})
-    return HttpResponse(t.render(c))
+    t = 'invoice/details.html'
+    c = {'faktura': faktura, 'polozky': polozky, 'zakaznik': zakaznik, 'sucet': sucet}
+    return HttpResponse(render_to_string(t, c))
 
 
 @login_required(login_url='/logmein/')
 def firmas_all(request):
     Firmas_list = Firma.objects.all()
-    t = loader.get_template('invoice/firmas.html')
-    c = Context({'Firmas_list': Firmas_list, })
-    return HttpResponse(t.render(c))
+    t = 'invoice/firmas.html'
+    c = {'Firmas_list': Firmas_list, }
+    return HttpResponse(render_to_string(t, c))
 
 
 @login_required(login_url='/logmein/')
 def zakaznik_all(request):
     zakaznik_list = Zakaznik.objects.all()
-    t = loader.get_template('invoice/zakaznici.html')
-    c = Context({'zakaznik_list': zakaznik_list, })
-    return HttpResponse(t.render(c))
+    t = 'invoice/zakaznici.html'
+    c = {'zakaznik_list': zakaznik_list, }
+    return HttpResponse(render_to_string(t, c))
 
 
 @login_required(login_url='/logmein/')
 def faktury_all(request):
     Fakturas_list = Faktura.objects.all()
-    t = loader.get_template('invoice/faktury.html')
-    c = Context({'Fakturas_list': Fakturas_list, })
-    return HttpResponse(t.render(c))
+    t = 'invoice/faktury.html'
+    c = {'Fakturas_list': Fakturas_list, }
+    return HttpResponse(render_to_string(t, c))
 
 
 @login_required(login_url='/logmein/')
 def firma(request, firma_id):
     firma = get_object_or_404(Firma, pk=firma_id)
     zoznam = Faktura.objects.filter(creator=firma.id)
-    t = loader.get_template('invoice/firma.html')
-    c = Context({'firma': firma, 'zoznam': zoznam})
-    return HttpResponse(t.render(c))
+    t = 'invoice/firma.html'
+    c = {'firma': firma, 'zoznam': zoznam}
+    return HttpResponse(render_to_string(t, c))
 
 
 @login_required(login_url='/logmein/')
 def zakaznik(request, zakaznik_id):
     zakaznik = get_object_or_404(Zakaznik, pk=zakaznik_id)
     zoznam = Faktura.objects.filter(created_for=zakaznik.id)
-    t = loader.get_template('invoice/zakaznik.html')
-    c = Context({'zakaznik': zakaznik, 'zoznam': zoznam})
-    return HttpResponse(t.render(c))
+    t = 'invoice/zakaznik.html'
+    c = {'zakaznik': zakaznik, 'zoznam': zoznam}
+    return HttpResponse(render_to_string(t, c))
 
 
 @login_required(login_url='/logmein/')
