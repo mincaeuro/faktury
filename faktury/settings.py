@@ -25,7 +25,7 @@ SECRET_KEY = '8ne7^h1$t)n8c-@2l3deycj$katk6h15&f2%j#k$!vj4wcj3wy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.100.2','*.minirobota.sk']
 
 
 # Application definition

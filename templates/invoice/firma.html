@@ -2,7 +2,7 @@
 <html>
 <head>
     {% include "invoice/head.html" %}
-    <title>Faktura {{firma}}</title>
+    <title>Detail Firmy: {{firma}}</title>
 
 </head>
 
@@ -25,6 +25,7 @@
         dic: {{firma.dic}}<br/>
         bankove udaje: {{firma.cislo_uctu}}, {{firma.banka}}
     </p>
+<div id="gmaps" style="width:100%;height:250px;"></div>
     {% if zoznam %}
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -54,6 +55,7 @@
     </div>
 
 </div>
+{% include "invoice/gmaps.html" %}
 </body>
 
 </html>

@@ -27,6 +27,7 @@
         c. uctu: {{zakaznik.cislo_uctu}}<br/>
         email: {{zakaznik.email}}
     </p>
+		<div id="gmaps" style="width:100%;height:250px;"></div>
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
@@ -54,6 +55,7 @@
     <p>Ziaden zaznam.</p>
     {% endif %}
 </div>
+{% include "invoice/gmaps.html" %}
 </body>
 
 </html>
