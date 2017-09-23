@@ -5,3 +5,4 @@ I wanna convert my old PHP Page to Python's Django.
 - wiped DB..
 - added posts
 - updated to work with Django version 1.11.4
+- added Google maps API
