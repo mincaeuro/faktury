@@ -21,7 +21,7 @@ class Login(models.Model):
 class Firma(models.Model):
     id = models.AutoField(primary_key=True)
     db_uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    creator = models.ForeignKey(Login, blank=False)
+    creator = models.ForeignKey(Login, blank=False, on_delete=models.CASCADE,)
     nazov = models.CharField(blank=False, max_length=200)
     meno = models.CharField(blank=False, max_length=50)
     priezvisko = models.CharField(blank=False, max_length=50)
@@ -53,8 +53,8 @@ class Firma(models.Model):
 class Zakaznik(models.Model):
     id = models.AutoField(primary_key=True)
     db_uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    owner = models.ForeignKey(Login, blank=False)
-    creator = models.ForeignKey(Firma, blank=False)
+    owner = models.ForeignKey(Login, blank=False, on_delete=models.CASCADE,)
+    creator = models.ForeignKey(Firma, blank=False, on_delete=models.CASCADE,)
     nazov = models.CharField(blank=True, max_length=200)
     meno = models.CharField(blank=True, max_length=50)
     cislo = models.CharField(blank=True, max_length=50)
@@ -77,9 +77,9 @@ class Zakaznik(models.Model):
 class Faktura(models.Model):
     id = models.AutoField(primary_key=True)
     db_uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    owner = models.ForeignKey(Login, blank=False)
-    creator = models.ForeignKey(Firma, blank=False)
-    created_for = models.ForeignKey(Zakaznik, blank=False)
+    owner = models.ForeignKey(Login, blank=False, on_delete=models.CASCADE,)
+    creator = models.ForeignKey(Firma, blank=False, on_delete=models.CASCADE,)
+    created_for = models.ForeignKey(Zakaznik, blank=False, on_delete=models.CASCADE,)
     cislo_faktury = models.CharField(blank=False, max_length=10)
     datum_vystavenia = models.DateField(blank=False)
     datum_splatnosti = models.DateField(blank=False)
@@ -96,8 +96,8 @@ class Faktura(models.Model):
 class Polozky(models.Model):
     id = models.AutoField(primary_key=True)
     db_uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    owner = models.ForeignKey(Login, blank=False)
-    faktura = models.ForeignKey(Faktura, blank=False)
+    owner = models.ForeignKey(Login, blank=False, on_delete=models.CASCADE,)
+    faktura = models.ForeignKey(Faktura, blank=False, on_delete=models.CASCADE,)
     dan = models.DecimalField(blank=False, max_digits=20, decimal_places=2)
     nazov = models.CharField(blank=False, max_length=300)
     mnozstvo = models.DecimalField(blank=False, max_digits=20, decimal_places=2)

@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from django.template import Context, loader, RequestContext
+#from django.template import Context, loader, RequestContext
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response, redirect
-from django.template.context_processors import csrf
+#from django.shortcuts import render_to_response, redirect
+#from django.template.context_processors import csrf
 from django.template.loader import render_to_string
 from django.contrib.auth import authenticate, login, logout
-from decimal import Decimal
+#from decimal import Decimal
 
 # Create your views here.
 from .models import *

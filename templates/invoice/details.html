@@ -9,10 +9,11 @@
 #qrcode {padding-right:25px; float:right; z-index:1}
 @media print
 {
+@page { margin: 0; }
     body {font-family:Arial}
     .breadcrumb{display:none;}
     h1 {padding-bottom:30px;color:gray; float:right; position:absolute: z-index:1}
-    #qrcode {z-index:0}
+    #qrcode {padding-right:25px; float:right; z-index:1; padding-top:-200px}
     .nav{display:none;}
     .btn{display:none;}
     .navbar-header {display:none;}
@@ -28,12 +29,9 @@ function printMe(){
      $("#body").show();
     window.print();
 };
-	
-
-
 
     </script>
-    <title>Faktura {{faktura.cislo_faktury}}</title>
+    <title>Faktura {{faktura.cislo_faktury}} - {{ faktura.creator.nazov }} - {{zakaznik.nazov}}</title>
 
 </head>
 
@@ -45,11 +43,9 @@ function printMe(){
         <li><a href="/">Domov</a></li>
         <li><a href="{% url 'invoice:faktury_all' %}">Faktury</a></li>
         <li class="active">Detail</li>
-
     </ol>
     <!--<button type="button" class="btn btn-danger"  OnClick=" location.href='/admin/' ">Admin</button> -->
-    <button type="button" class="btn" title="Vytlacit fakturu c. {{faktura.cislo_faktury}} " onclick="printMe()"><i
-            class="glyphicon glyphicon-print"></i></button>
+    <button type="button" class="btn" title="Vytlacit fakturu c. {{faktura.cislo_faktury}} " onclick="printMe()"><i class="glyphicon glyphicon-print"></i></button>
 
     <h1>Faktura: {{faktura.cislo_faktury}}</h1>
     <div id="details">
@@ -67,15 +63,9 @@ function printMe(){
                 <hr class="soften"/>
                 <h4><b>Datum vystavenia:</b> {{faktura.datum_vystavenia}}</h4>
                 <h4><b>Datum splatnosti:</b> {{faktura.datum_splatnosti}}</h4>
-                <hr class="soften"/>
-                <h5><b>Komentar:</b></h5>
-                <p>{{faktura.komentar}}</p>
-                <hr class="soften"/>
+
+
             </div>
-
-            <img src="https://services.profit365.eu/API/QR/PayBySquare.png?IBAN={{ faktura.creator.cislo_uctu }}&BIC={{ faktura.creator.cislo_swift }}&Currency=EUR&Amount={{sucet}}&DueDate={{ faktura.datum_splatnosti|date:'Y-m-d'}}&VS={{faktura.cislo_faktury}}&CS=0000&SS=0000&Description={{faktura.komentar}}&ID=&Size=256"
-                 id="qrcode"/>
-
             <div class="col-lg-6 odbetratel">
                 <h3><b>Odbetratel:</b></h3>
                 <p>{{zakaznik.nazov}}</p>
@@ -83,7 +73,22 @@ function printMe(){
                 <p>{{zakaznik.meno}} {{zakaznik.priezvisko}}</p>
                 <p>{{zakaznik.adresa_ulica}} <br/> {{zakaznik.adresa_mesto}} <br/> {{zakaznik.adresa_psc}}</p>
             </div>
+
         </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                <hr class="soften"/>
+                <h5><b>Komentar:</b></h5>
+                <p>{{faktura.komentar}}</p>
+                <hr class="soften"/>
+                </div>
+            <div class="col-lg-3">
+<img src="https://services.profit365.eu/API/QR/PayBySquare.png?IBAN={{ faktura.creator.cislo_uctu }}&BIC={{ faktura.creator.cislo_swift }}&Currency=EUR&Amount={{sucet}}&DueDate={{ faktura.datum_splatnosti|date:'Y-m-d'}}&VS={{faktura.cislo_faktury}}&CS=0000&SS=0000&Description={{faktura.komentar}}&ID=&Size=256"
+                />
+            </div>
+            </div>
+
 
         {% if polozky %}
 

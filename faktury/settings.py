@@ -25,7 +25,7 @@ SECRET_KEY = '8ne7^h1$t)n8c-@2l3deycj$katk6h15&f2%j#k$!vj4wcj3wy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.100.2','*.minirobota.sk']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,16 +40,15 @@ INSTALLED_APPS = (
     'invoice',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-)
+]
 
 ROOT_URLCONF = 'faktury.urls'
 
