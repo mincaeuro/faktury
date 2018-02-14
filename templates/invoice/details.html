@@ -37,6 +37,7 @@ function printMe(){
 
 <body>
 {% include "invoice/nav.html" %}
+{% load l10n %}
 <div class="container-fluid">
 
     <ol class="breadcrumb">
@@ -77,15 +78,14 @@ function printMe(){
         </div>
 
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 dodavatel">
                 <hr class="soften"/>
                 <h5><b>Komentar:</b></h5>
                 <p>{{faktura.komentar}}</p>
                 <hr class="soften"/>
                 </div>
-            <div class="col-lg-3">
-<img src="https://services.profit365.eu/API/QR/PayBySquare.png?IBAN={{ faktura.creator.cislo_uctu }}&BIC={{ faktura.creator.cislo_swift }}&Currency=EUR&Amount={{sucet}}&DueDate={{ faktura.datum_splatnosti|date:'Y-m-d'}}&VS={{faktura.cislo_faktury}}&CS=0000&SS=0000&Description={{faktura.komentar}}&ID=&Size=256"
-                />
+            <div class="col-lg-3 odbetratel">
+<img src="https://services.profit365.eu/API/QR/PayBySquare.png?IBAN={{ faktura.creator.cislo_uctu }}&BIC={{ faktura.creator.cislo_swift }}&Currency=EUR&Amount={{sucet|unlocalize}}&DueDate={{ faktura.datum_splatnosti|date:'Y-m-d'}}&VS={{faktura.cislo_faktury}}&CS=0000&SS=0000&Description={{faktura.komentar}}&ID=&Size=256" class="qrcode" />
             </div>
             </div>
 
@@ -118,7 +118,7 @@ function printMe(){
                 {% endfor %}
                 <tr>
                     <td colspan="4" class="text-right bg-success"><b>Spolu total: </b></td>
-                    <td class="bg-success"> {{ sucet }} €</td>
+                    <td class="bg-success"> {{ sucet|unlocalize }} €</td>
                 </tr>
                 </tbody>
             </table>
