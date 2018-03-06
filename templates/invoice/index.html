@@ -4,7 +4,6 @@
 
     {% include "invoice/head.html" %}
 
-
     <title>Faktury zakaznika</title>
 
 </head>
@@ -16,7 +15,7 @@
 
     <h1>Faktury online</h1>
 
-    <p> Jednoducha online faktracia</p>
+    <h3> Jednoducha online faktracia</h3>
     {% if user.is_authenticated %}
     <p>Vitajte "{{ user.username }}" !!!</p>
 
@@ -53,8 +52,9 @@
 
     {% else %}
 
-    <p>Prihlaste sa:</p>
-    <div id="login">
+
+    <div id="login" class="center_div">
+        <p>Prihlaste sa:</p>
         <form name="LoginForm" action="/admin/login/?next=/" method="post" class="form-horizontal">
             <div class="form-group">
                 {% csrf_token %}

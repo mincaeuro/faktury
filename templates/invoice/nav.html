@@ -8,28 +8,34 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><i class="glyphicon glyphicon-home"></i></a>
+            <a class="navbar-brand" href="/" title="Domov"><i class="glyphicon glyphicon-home"></i></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <!-- top nav -->
-                <li><a href="/">Domov</a></li>
+               <li><a href="/">Domov</a></li>
+                {% if user.is_authenticated %}
                 <li
                 {% if request.get_full_path == 'invoice:firmas_all' %} class="active" {% endif %}><a
-                    href="{% url 'invoice:firmas_all' %}">Moje Firmy</a></li>
+                    href="{% url 'invoice:firmas_all' %}"><i class="glyphicon glyphicon-eur"></i> Moje Firmy</a></li>
                 <li
                 {% if request.get_full_path == 'invoice:zakaznik_all' %} class="active" {% endif %}><a
-                    href="{% url 'invoice:zakaznik_all' %}">Moji zakaznici</a></li>
+                    href="{% url 'invoice:zakaznik_all' %}"><i class="glyphicon glyphicon-user"></i> Moji zakaznici</a></li>
                 <li
                 {% if request.get_full_path == 'invoice:faktury_all' %} class="active" {% endif %}><a
-                    href="{% url 'invoice:faktury_all' %}">Faktury</a></li>
+                    href="{% url 'invoice:faktury_all' %}"><i class="glyphicon glyphicon-tasks"></i> Faktury</a></li>
                 <li
-                {% if request.get_full_path == 'invoice:firmas_all' %} class="active" {% endif %}><a href="/#">Nastavenia
+                {% if request.get_full_path == 'invoice:firmas_all' %} class="active" {% endif %}><a href="/#"><i class="glyphicon glyphicon-cog"></i> Nastavenia
                 uctu</a></li>
-                {% if user.is_authenticated %}
+
+
                 <li><a href="/admin"><i class="glyphicon glyphicon-wrench"></i> Admin</a></li>
                 <li><a href="/admin/logout/?next=/"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
                 {% endif %}
+                <li
+                {% if request.get_full_path == 'invoice:kontakt' %} class="active" {% endif %}><a
+                    href="{% url 'invoice:kontakt' %}"><i class="glyphicon glyphicon-phone-alt"></i> Kontakt</a></li>
+
             </ul>
         </div>
     </div>

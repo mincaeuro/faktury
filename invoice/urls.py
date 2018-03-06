@@ -13,4 +13,6 @@ urlpatterns = [
 	path('detail/<int:faktura_id>/edit/', views.edit_detail, name='edit_detail'),
 	path('firma/<int:firma_id>/', views.firma, name='firma'),
 	path('zakaznik/<int:zakaznik_id>/', views.zakaznik, name='zakaznik'),
+	path('kontakt/', views.kontakt, name='kontakt'),
+
 ]

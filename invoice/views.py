@@ -20,6 +20,9 @@ def index(request):
     return render(request, 'invoice/index.html',
                   {'Fakturas_list': Fakturas_list, 'Login_list': Login_list, 'form': LoginForm, 'sucet_list': sucet_list})
 
+def kontakt(request):
+    return render(request, 'invoice/kontakt.html')
+
 
 ####custom login - not in use
 
