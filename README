@@ -4,4 +4,4 @@ I wanna convert my old PHP Page to Python's Django.
 
 - wiped DB..
 - added posts
-- updated to work with Django version 1.11.4
+- updated to work with Django version 2.15
